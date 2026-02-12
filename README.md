@@ -3,7 +3,7 @@
 Welcome to the GiftTracker wiki!
 
 ## Business Requirement
-Create a software that simplifies tracking birthdays and gift purchases. 
+Create a software that simplifies tracking birthdays and gift ideas. 
 
 ## Use Cases
 - **UC1: A user shall record gift data for gift recipients.**
