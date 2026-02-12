@@ -32,7 +32,7 @@ Create a software that simplifies tracking birthdays and gift purchases.
   - *FR4.2 A user shall enter their account email to receive email reminders.*
   - *FR4.3 A user shall enter their account phone number to receive SMS reminders.*
   - *FR4.4 The system shall send the user an event reminder by email and SMS 2 weeks before important dates.*
-  - *FR4.5 Event reminders should run daily at 00:00 hours. 
+  - *FR4.5 Event reminders should be sent out daily at 10:00 hours.*
   - *NFR4.1 Once account information is entered, reminders should be sent with minimal action from the user.* 
 - **UC5: A user shall enter spending suggestions into recipient records.**
   - *FR5.1 A user shall optionally enter a suggested gift cost (min/max) in a recipient record.*
@@ -40,6 +40,6 @@ Create a software that simplifies tracking birthdays and gift purchases.
 - **UC6 Recipient records shall integrate with online calendar, such as Google Calendar.**
   - *FR6.1 A user shall securely enter account credentials for a Google cloud account.*
   - *FR6.2 The system shall synchronize persistent data with the user's Google Calendar account.*
-  - *FR6.3 The user account shall be synchronized upon the entry of a new recipient record. 
+  - *FR6.3 The user account shall be synchronized upon the entry of a new recipient record.*
   - *NFR6.3 A user with account credentials should be able to set up account synchronization within 10 minutes.*
   
