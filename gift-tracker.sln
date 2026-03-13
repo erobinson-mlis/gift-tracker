@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GiftTrackerProject", "GiftTrackerProject", "{CBCE7157-320C-9471-631E-E39354F8D608}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiftTracker", "GiftTrackerProject\GiftTracker\GiftTracker.csproj", "{69ECFB49-DD60-0B4C-E88A-F620C1720D71}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69ECFB49-DD60-0B4C-E88A-F620C1720D71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69ECFB49-DD60-0B4C-E88A-F620C1720D71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69ECFB49-DD60-0B4C-E88A-F620C1720D71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69ECFB49-DD60-0B4C-E88A-F620C1720D71}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{69ECFB49-DD60-0B4C-E88A-F620C1720D71} = {CBCE7157-320C-9471-631E-E39354F8D608}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8190F03-08E3-4240-ADB5-5D9F1D04D3BE}
+	EndGlobalSection
+EndGlobal

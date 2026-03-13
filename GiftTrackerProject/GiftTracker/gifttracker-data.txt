@@ -26,3 +26,7 @@ Name: Roger Simpson
 Birthday: not sure
 Gift Idea: Coffee pot
 
+Name: Tricia Pentico
+Birthday: 
+Gift Idea: Al-Anon book
+
