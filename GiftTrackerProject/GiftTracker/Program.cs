@@ -7,7 +7,7 @@ class Program
     static void Main(string[] args)
     {
         Console.Clear();
-        Console.WriteLine("Welcome to the GiftTracker!");
+        Console.WriteLine("Welcome to the 🎁GiftTracker🎁");
         Console.Write("\nPlease select mode (view OR record):");
         string mode = Console.ReadLine();
 
