@@ -11,19 +11,25 @@ class Program
         Console.Write("\nPlease select mode (view OR record):");
         string mode = Console.ReadLine();
 
-        // View data from file
+
+        // data.View(): View data from file
         if(mode=="view") {
             Console.Clear();
             Console.WriteLine("Loading data from file...");
-            File.ReadAllLines("gift-suggestions.json");
-        }
+            string fileContents = File.ReadAllText("gifttracker-data.txt");
 
-        // Record new record for gift recipient
+            Console.WriteLine($"\n{fileContents}");
+
+        } //if(mode=="view")
+
+
+        // data.Record(): Record new record for gift recipient
         if(mode=="record") {
 
             string command; 
 
             do {
+                // data.newRecord()
                 Console.Clear();
                 Console.WriteLine("Let's create a new record...");
 
@@ -46,7 +52,10 @@ class Program
 
                 Console.WriteLine("\nEnter command (end OR continue): ");
                 command = Console.ReadLine();
-            } while(command !="end");
-        }
-    }
-}
+            } while(command != "end");
+
+        } // if(mode=="record")
+
+    } //static void Main
+
+} //class Program
