@@ -30,7 +30,3 @@ Name: bob jones
 Birthday: unknown
 Gift Idea: bible
 
-Name: Eric Proctor
-Birthday: 05-09-1970
-Gift Idea: Plane ticket
-

@@ -5,6 +5,7 @@
 
 # dotenv files
 .env
+
 gifttracker-data.txt
 
 # User-specific files
