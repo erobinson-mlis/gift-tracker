@@ -1,60 +1,77 @@
 ﻿namespace GiftTracker;
 
+using System.Data;
 using System.IO;
+using System.Transactions;
 
 class Program
 {
     static void Main(string[] args)
     {
+        // Print welcome message
         Console.Clear();
         Console.WriteLine("Welcome to the 🎁GiftTracker🎁");
-        Console.Write("\nPlease select mode (view OR record):");
-        string mode = Console.ReadLine();
-        
-        // data.View(): View data from file
-        if(mode=="view") {
+        string mode;
+
+        // Mode selection loop
+        do {
+            // Prompt to select mode
             Console.Clear();
-            Console.WriteLine("Loading data from file...");
-            string fileContents = File.ReadAllText("gifttracker-data.txt");
+            Console.Write("\nPlease select mode (view, record, or exit):");
+            mode = Console.ReadLine();
+            // data.View(): View data from file
+            if(mode=="view") {
 
-            Console.WriteLine($"\n{fileContents}");
-
-        } //if(mode=="view")
-
-
-        // data.Record(): Record new record for gift recipient
-        if(mode=="record") {
-
-            string command; 
-
-            do {
-                // data.newRecord()
-                Console.Clear();
-                Console.WriteLine("Let's create a new record...");
-
-                Console.WriteLine("\nEnter first name: ");
-                string firstName = Console.ReadLine();
-                Console.WriteLine("Enter last name: ");
-                string lastName = Console.ReadLine();
-                Console.WriteLine($"\nThis gift is for {firstName} {lastName}.");
+                string command;
                 
-                Console.WriteLine($"\nEnter {firstName}'s birthday: (DD-MM-YYYY): ");
-                string birthday = Console.ReadLine();
+                do {
+                    Console.Clear();
+                    Console.WriteLine("Loading data from file...");
+                    string fileContents = File.ReadAllText("gifttracker-data.txt");
 
-                Console.WriteLine("\nPlease enter a description of your gift idea.");
-                string giftDescription = Console.ReadLine();
+                    Console.WriteLine($"\n{fileContents}");
 
-                Console.WriteLine("\nRecording data...");
-                string recordEntry = $"Name: {firstName} {lastName}\nBirthday: {birthday}\nGift Idea: {giftDescription}";
-                Console.WriteLine(recordEntry);
-                File.AppendAllText("gifttracker-data.txt", $"{recordEntry}\n\n");
+                    Console.WriteLine("Enter END to return to menu.");
+                    command = Console.ReadLine();
+                } while(command != "end");
 
-                Console.WriteLine("\nEnter command (end OR continue): ");
-                command = Console.ReadLine();
-            } while(command != "end");
+            } // view data loop
 
-        } // if(mode=="record")
+            // data.Record(): Record new record for gift recipient
+            if(mode=="record") {
 
-    } //static void Main
+                string command; 
+
+                do {
+                    // data.newRecord()
+                    Console.Clear();
+                    Console.WriteLine("Let's create a new record...");
+
+                    Console.WriteLine("\nEnter first name: ");
+                    string firstName = Console.ReadLine();
+                    Console.WriteLine("Enter last name: ");
+                    string lastName = Console.ReadLine();
+                    Console.WriteLine($"\nThis gift is for {firstName} {lastName}.");
+                    
+                    Console.WriteLine($"\nEnter {firstName}'s birthday: (DD-MM-YYYY): ");
+                    string birthday = Console.ReadLine();
+
+                    Console.WriteLine("\nPlease enter a description of your gift idea.");
+                    string giftDescription = Console.ReadLine();
+
+                    Console.WriteLine("\nRecording data...");
+                    string recordEntry = $"Name: {firstName} {lastName}\nBirthday: {birthday}\nGift Idea: {giftDescription}";
+                    Console.WriteLine(recordEntry);
+                    File.AppendAllText("gifttracker-data.txt", $"{recordEntry}\n\n");
+
+                    Console.WriteLine("\nEnter command (end OR continue): ");
+                    command = Console.ReadLine();
+                } while(command != "end");
+
+            } // record data loop
+
+        } while(mode != "exit"); // mode selection loop
+
+    } // static void Main
 
 } //class Program
