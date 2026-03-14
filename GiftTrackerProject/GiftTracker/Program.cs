@@ -10,8 +10,7 @@ class Program
         Console.WriteLine("Welcome to the 🎁GiftTracker🎁");
         Console.Write("\nPlease select mode (view OR record):");
         string mode = Console.ReadLine();
-
-
+        
         // data.View(): View data from file
         if(mode=="view") {
             Console.Clear();
