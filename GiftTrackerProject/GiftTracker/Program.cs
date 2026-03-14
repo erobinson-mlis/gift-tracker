@@ -2,6 +2,7 @@
 
 using System.Data;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Transactions;
 
 class Program
@@ -17,24 +18,44 @@ class Program
         do {
             // Prompt to select mode
             Console.Clear();
-            Console.Write("\nPlease select mode (view, record, or exit):");
+            Console.Write("\nPlease select mode (view, record, or exit): ");
             mode = Console.ReadLine();
+
             // data.View(): View data from file
-            if(mode=="view") {
+            if(mode=="view") {        
 
-                string command;
-                
-                do {
-                    Console.Clear();
-                    Console.WriteLine("Loading data from file...");
-                    string fileContents = File.ReadAllText("gifttracker-data.txt");
+                // check that gifttracker-data.txt file is available; if not, create it
+                string filePath = "gifttracker-data.txt";
 
-                    Console.WriteLine($"\n{fileContents}");
+                if (!File.Exists(filePath))
+                {
+                    Console.WriteLine("No datafile present.\n>>> Creating new datafile...");
+                    File.WriteAllText(filePath, "Empty datafile\n");
+                    Console.WriteLine("\nNew datafile created.\nPlease return to menu to enter add records.");
 
-                    Console.WriteLine("Enter END to return to menu.");
-                    command = Console.ReadLine();
-                } while(command != "end");
+                    string main_menu;
+                    // Load data from filePath
+                    do
+                    {
+                        Console.WriteLine("\nEnter 'end' to continue:");
+                        main_menu = Console.ReadLine();
+                    } while (main_menu != "end");
+                } // end if
 
+                else {
+                    string command; 
+                    // Load data from filePath
+                    do {
+                        Console.Clear();
+                        Console.WriteLine("Loading data from file...");
+                        string fileContents = File.ReadAllText("gifttracker-data.txt");
+
+                        Console.WriteLine($"\n{fileContents}");
+
+                        Console.WriteLine("Enter 'end' to return to menu.");
+                        command = Console.ReadLine();
+                    } while(command != "end");
+                } // end else
             } // view data loop
 
             // data.Record(): Record new record for gift recipient

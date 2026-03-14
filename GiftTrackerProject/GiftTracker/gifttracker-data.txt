@@ -1,32 +1,5 @@
+Empty datafile
 Name: Eric Robinson
 Birthday: 12-11-1971
-Gift Idea: Coffee pot with autobrew
-
-Name: Emily Lopez
-Birthday: 21-05-1982
-Gift Idea: Emerald ring
-
-Name: Kerry Stockwell
-Birthday: 23-08-1947
-Gift Idea: Digital picture frame
-
-Name: Laura Williams
-Birthday: 23-04-1967
-Gift Idea: Putin blanket
-
-Name: Frank Stockwell
-Birthday: 23-04-1947
-Gift Idea: Artisanal urn
-
-Name: Roger Simpson
-Birthday: not sure
-Gift Idea: Coffee pot
-
-Name: Tricia Pentico
-Birthday: 
-Gift Idea: Al-Anon book
-
-Name: bob jones
-Birthday: unknown
-Gift Idea: bible
+Gift Idea: Bookshelves
 
