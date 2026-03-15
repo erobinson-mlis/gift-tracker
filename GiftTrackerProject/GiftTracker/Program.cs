@@ -74,7 +74,7 @@ class Program
                 string command; 
 
                 do {
-                    // data.newRecord()
+                    // data.createRecord()
                     Console.Clear();
                     Console.WriteLine("Let's create a new record...");
 
@@ -90,13 +90,29 @@ class Program
                     Console.WriteLine("\nPlease enter a description of your gift idea.");
                     string giftDescription = Console.ReadLine();
 
-                    Console.WriteLine("\nRecording data...");
+                    Console.WriteLine("\nPlease confirm the data below:\n");
                     string recordEntry = $"Name: {firstName} {lastName}\nBirthday: {birthday}\nGift Idea: {giftDescription}";
                     Console.WriteLine(recordEntry);
-                    File.AppendAllText("gifttracker-data.txt", $"{recordEntry}\n\n");
+                    
+                    Console.WriteLine("\nIs this correct?\n('yes' to save data OR 'no' to return to editing): ");
+                    string confirmation = Console.ReadLine();
 
-                    Console.WriteLine("\nEnter 'return' to return to menu or 'add' to add another record: ");
+                    if(confirmation=="yes")
+                    {
+                        // Save to datafile
+                        Console.WriteLine("\nSaving data to file...");
+                        Console.WriteLine(recordEntry);
+                        File.AppendAllText("gifttracker-data.txt", $"{recordEntry}\n\n");
+                    }
+
+                    if (confirmation == "no")
+                    {
+                        break;
+                    }
+                    
+                    Console.WriteLine("\nEnter 'return' to return to menu or 'new' to add another new record: ");
                     command = Console.ReadLine();
+
                 } while(command != "return");
 
             } // record data loop

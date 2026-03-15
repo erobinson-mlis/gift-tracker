@@ -14,3 +14,15 @@ Name: Roger Simpson
 Birthday: unknown
 Gift Idea: Coffee pot
 
+Name: Bob Jones
+Birthday: 25-12-1971
+Gift Idea: Bible
+
+Name: Bob Smith
+Birthday: 12-01-1999
+Gift Idea: dishware
+
+Name: Laura Williams
+Birthday: 23-04-1967
+Gift Idea: Plane ticket
+
