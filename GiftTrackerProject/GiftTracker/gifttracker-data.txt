@@ -1,11 +1,7 @@
-Name: Eric Robinson
-Birthday: 12-11-1971
-Gift Idea: Graph theory books
-
-Name: Bob Jones
-Birthday: 12-12-1940
-Gift Idea:Bible
-Vendor: Zondervan
-Vendor URL: 
-Price Range: 
+Name: Emily Lopez
+Birthday: 21-05-1982
+Gift Idea: Wedding ring
+Vendor: Zales
+Vendor URL: zales.com
+Price Range: $25.00
 

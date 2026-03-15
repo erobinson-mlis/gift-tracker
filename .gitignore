@@ -5,7 +5,6 @@
 
 # dotenv files
 .env
-
 GiftTrackerProject/GiftTracker/gifttracker-data.txt
 
 # User-specific files
