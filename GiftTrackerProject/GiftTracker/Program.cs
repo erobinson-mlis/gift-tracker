@@ -22,10 +22,10 @@ class Program
         do {
             // Prompt to select mode
             Console.Clear();
-            Console.Write("🎁GiftTracker🎁\n\nPlease select mode:\n'view' to view records\n'record' to enter new records\n'exit' to exit the app\n: ");
-            mode = Console.ReadLine();
+            Console.Write("🎁GiftTracker🎁\n\nPlease select mode:\n  'view' to view records\n  'new' to enter new records\n  'exit' to exit the app\n> ");
+            mode = Console.ReadLine()!.ToLower();
 
-            // data.View(): View data from file
+            // Record.ViewAll(): View data from file
             if(mode=="view") {        
 
                 // check that gifttracker-data.txt file is available; if not, create it
@@ -42,7 +42,8 @@ class Program
                     do
                     {
                         Console.WriteLine("\nEnter 'return' to return to menu:");
-                        main_menu = Console.ReadLine();
+                        main_menu = Console.ReadLine()!;
+                        main_menu.ToLower();
                     } while (main_menu != "return");
                 } // end if
 
@@ -61,41 +62,56 @@ class Program
                         Console.WriteLine($"\n{fileContents}");
 
                         Console.WriteLine("Enter 'return' to return to menu:");
-                        command = Console.ReadLine();
+                        command = Console.ReadLine()!.ToLower();
                     } while(command != "return");
                 } // end else
 
 
             } // view data loop
 
-            // data.Record(): Record new record for gift recipient
-            if(mode=="record") {
+            // Record.CreateNew(): Record new record for gift recipient
+            if(mode=="new") {
 
                 string command; 
 
                 do {
-                    // data.createRecord()
+                    // Enter record data for gift recipient
                     Console.Clear();
                     Console.WriteLine("Let's create a new record...");
 
                     Console.WriteLine("\nEnter first name: ");
-                    string firstName = Console.ReadLine();
-                    Console.WriteLine("Enter last name: ");
-                    string lastName = Console.ReadLine();
-                    Console.WriteLine($"\nThis gift is for {firstName} {lastName}.");
+                    string firstName = Console.ReadLine() ?? string.Empty;
+                    if (firstName != null) {
+                        firstName = char.ToUpper(firstName[0]) + firstName.Substring(1).ToLower();
+                    }
+
+                    Console.WriteLine("\nEnter last name: ");
+                    string lastName = Console.ReadLine() ?? "Unknown";
+                    if (lastName != null) {
+                        lastName = char.ToUpper(lastName[0]) + lastName.Substring(1).ToLower();
+                    }
                     
                     Console.WriteLine($"\nEnter {firstName}'s birthday: (DD-MM-YYYY): ");
-                    string birthday = Console.ReadLine();
+                    string birthday = Console.ReadLine() ?? "Unknown";
 
                     Console.WriteLine("\nPlease enter a description of your gift idea.");
-                    string giftDescription = Console.ReadLine();
+                    string giftDescription = Console.ReadLine() ?? "None";
+
+                    Console.WriteLine("\nEnter an optional vendor who sells this gift: ");
+                    string vendorName = Console.ReadLine() ?? "None";
+
+                    Console.WriteLine("\nEnter an optional online vendor URL:");
+                    string vendorURL = Console.ReadLine() ?? "None";
+
+                    Console.WriteLine("\nEnter an approximate price range for the gift (e.g. $50-$100): ");
+                    string priceRange = Console.ReadLine() ?? "None";
 
                     Console.WriteLine("\nPlease confirm the data below:\n");
-                    string recordEntry = $"Name: {firstName} {lastName}\nBirthday: {birthday}\nGift Idea: {giftDescription}";
+                    string recordEntry = $"Name: {firstName} {lastName}\nBirthday: {birthday}\nGift Idea: {giftDescription}\nVendor: {vendorName}\nVendor URL: {vendorURL}\nPrice Range: {priceRange}";
                     Console.WriteLine(recordEntry);
                     
                     Console.WriteLine("\nIs this correct?\n('yes' to save data OR 'no' to return to editing): ");
-                    string confirmation = Console.ReadLine();
+                    string confirmation = Console.ReadLine()!.ToLower();
 
                     if(confirmation=="yes")
                     {
@@ -111,7 +127,7 @@ class Program
                     }
                     
                     Console.WriteLine("\nEnter 'return' to return to menu or 'new' to add another new record: ");
-                    command = Console.ReadLine();
+                    command = Console.ReadLine()!.ToLower();
 
                 } while(command != "return");
 

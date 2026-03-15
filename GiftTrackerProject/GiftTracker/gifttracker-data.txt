@@ -2,27 +2,10 @@ Name: Eric Robinson
 Birthday: 12-11-1971
 Gift Idea: Graph theory books
 
-Name: Emily Lopez
-Birthday: 21-05-1982
-Gift Idea: Puzzles
-
-Name: Kerry Stockwell
-Birthday: 23-08-1948
-Gift Idea: Dining table
-
-Name: Roger Simpson
-Birthday: unknown
-Gift Idea: Coffee pot
-
 Name: Bob Jones
-Birthday: 25-12-1971
-Gift Idea: Bible
-
-Name: Bob Smith
-Birthday: 12-01-1999
-Gift Idea: dishware
-
-Name: Laura Williams
-Birthday: 23-04-1967
-Gift Idea: Plane ticket
+Birthday: 12-12-1940
+Gift Idea:Bible
+Vendor: Zondervan
+Vendor URL: 
+Price Range: 
 
