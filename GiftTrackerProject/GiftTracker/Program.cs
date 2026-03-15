@@ -22,7 +22,7 @@ class Program
         do {
             // Prompt to select mode
             Console.Clear();
-            Console.Write("\nPlease select mode:\n'view' to view records\n'record' to enter new records\n'exit' to exit the app\n: ");
+            Console.Write("🎁GiftTracker🎁\n\nPlease select mode:\n'view' to view records\n'record' to enter new records\n'exit' to exit the app\n: ");
             mode = Console.ReadLine();
 
             // data.View(): View data from file
@@ -55,7 +55,7 @@ class Program
                         Console.WriteLine("Loading data from file...");
                         // Check length of data file and display file empty if no contents
                         if(fileContents.Length < 1) {
-                            Console.WriteLine("Data file is currently empty.\nReturn to menu to add new records.");
+                            Console.WriteLine("\nData file is currently empty.\nReturn to menu to add new records.");
                         } // end if
 
                         Console.WriteLine($"\n{fileContents}");
