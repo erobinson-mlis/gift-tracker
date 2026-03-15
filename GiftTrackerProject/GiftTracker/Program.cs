@@ -1,5 +1,6 @@
 ﻿namespace GiftTracker;
 
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -29,33 +30,40 @@ class Program
 
                 if (!File.Exists(filePath))
                 {
-                    Console.WriteLine("No datafile present.\n>>> Creating new datafile...");
-                    File.WriteAllText(filePath, "Empty datafile\n");
+                    Console.WriteLine("\nNo datafile present.\n>>> Creating new datafile...");
+                    File.WriteAllText(filePath, "");
                     Console.WriteLine("\nNew datafile created.\nPlease return to menu to enter add records.");
 
                     string main_menu;
                     // Load data from filePath
                     do
                     {
-                        Console.WriteLine("\nEnter 'end' to continue:");
+                        Console.WriteLine("\nEnter 'return' to return to menu:");
                         main_menu = Console.ReadLine();
-                    } while (main_menu != "end");
+                    } while (main_menu != "return");
                 } // end if
 
                 else {
                     string command; 
+                    string fileContents = File.ReadAllText("gifttracker-data.txt");
                     // Load data from filePath
                     do {
                         Console.Clear();
-                        Console.WriteLine("Loading data from file...");
-                        string fileContents = File.ReadAllText("gifttracker-data.txt");
+                        Console.WriteLine("Loading data from file...\n");
+                        // Check length of data file and display file empty if no contents
+                        if(fileContents.Length < 1)
+                        {
+                            Console.WriteLine("Data file is currently empty.\nReturn to menu to add new records.\n");
+                        } // end if
 
-                        Console.WriteLine($"\n{fileContents}");
+                        Console.WriteLine($"{fileContents}");
 
-                        Console.WriteLine("Enter 'end' to return to menu.");
+                        Console.WriteLine("Enter 'return' to return to menu:");
                         command = Console.ReadLine();
-                    } while(command != "end");
+                    } while(command != "return");
                 } // end else
+
+
             } // view data loop
 
             // data.Record(): Record new record for gift recipient
@@ -85,9 +93,9 @@ class Program
                     Console.WriteLine(recordEntry);
                     File.AppendAllText("gifttracker-data.txt", $"{recordEntry}\n\n");
 
-                    Console.WriteLine("\nEnter command (end OR continue): ");
+                    Console.WriteLine("\nEnter 'return' to return to menu or 'add' to add another record: ");
                     command = Console.ReadLine();
-                } while(command != "end");
+                } while(command != "return");
 
             } // record data loop
 
@@ -95,4 +103,4 @@ class Program
 
     } // static void Main
 
-} //class Program
+} //class Programr
