@@ -6,3 +6,11 @@ Name: Emily Lopez
 Birthday: 21-05-1982
 Gift Idea: Puzzles
 
+Name: Kerry Stockwell
+Birthday: 23-08-1948
+Gift Idea: Dining table
+
+Name: Roger Simpson
+Birthday: unknown
+Gift Idea: Coffee pot
+

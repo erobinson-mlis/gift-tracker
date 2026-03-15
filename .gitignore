@@ -6,7 +6,7 @@
 # dotenv files
 .env
 
-gifttracker-data.txt
+GiftTrackerProject/GiftTracker/gifttracker-data.txt
 
 # User-specific files
 *.rsuser
@@ -482,3 +482,4 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
