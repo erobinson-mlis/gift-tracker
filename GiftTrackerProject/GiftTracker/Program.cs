@@ -12,14 +12,17 @@ class Program
     {
         // Print welcome message
         Console.Clear();
-        Console.WriteLine("Welcome to the 🎁GiftTracker🎁");
+        Console.WriteLine("🎁GiftTracker🎁\n\nWelcome to GiftTracker, an app for storing names,\nbirthdays, and gift idea information to simplify\ngift idea tracking");
+        Console.WriteLine("\nPress any key to continue.");
+        Console.ReadKey();
+
         string mode;
 
         // Mode selection loop
         do {
             // Prompt to select mode
             Console.Clear();
-            Console.Write("\nPlease select mode (view, record, or exit): ");
+            Console.Write("\nPlease select mode:\n'view' to view records\n'record' to enter new records\n'exit' to exit the app\n: ");
             mode = Console.ReadLine();
 
             // data.View(): View data from file
@@ -49,14 +52,13 @@ class Program
                     // Load data from filePath
                     do {
                         Console.Clear();
-                        Console.WriteLine("Loading data from file...\n");
+                        Console.WriteLine("Loading data from file...");
                         // Check length of data file and display file empty if no contents
-                        if(fileContents.Length < 1)
-                        {
-                            Console.WriteLine("Data file is currently empty.\nReturn to menu to add new records.\n");
+                        if(fileContents.Length < 1) {
+                            Console.WriteLine("Data file is currently empty.\nReturn to menu to add new records.");
                         } // end if
 
-                        Console.WriteLine($"{fileContents}");
+                        Console.WriteLine($"\n{fileContents}");
 
                         Console.WriteLine("Enter 'return' to return to menu:");
                         command = Console.ReadLine();
@@ -103,4 +105,4 @@ class Program
 
     } // static void Main
 
-} //class Programr
+} //class Program
