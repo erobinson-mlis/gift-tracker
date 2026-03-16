@@ -69,7 +69,7 @@ class Program
 
             } // view data loop
 
-            // Record.CreateNew(): Record new record for gift recipient
+            // Record.CreateNew(): Create new record and save to file
             if(mode=="new") {
 
                 string command; 
@@ -80,19 +80,34 @@ class Program
                     Console.WriteLine("Let's create a new record...");
 
                     Console.WriteLine("\nEnter first name: ");
-                    string firstName = Console.ReadLine() ?? string.Empty;
+                    string firstName= Console.ReadLine()!;
+
+                    // Check if the input is null or empty
+                    bool isValid = false;
+                    if (string.IsNullOrEmpty(firstName))
+                        do {
+                            
+                            Console.WriteLine("We need a name to track your gift ideas!\nPlease enter a valid (non-empty) first name:");
+                            firstName = Console.ReadLine()!;
+                        
+                            if (!string.IsNullOrEmpty(firstName))
+                            {
+                                isValid = true;
+                            }
+                    } while(!isValid);
+
                     if (firstName != null) {
                         firstName = char.ToUpper(firstName[0]) + firstName.Substring(1).ToLower();
                     }
 
                     Console.WriteLine("\nEnter last name: ");
-                    string lastName = Console.ReadLine() ?? "Unknown";
-                    if (lastName != null) {
+                    string lastName = Console.ReadLine() ?? "None";
+                    if (!string.IsNullOrEmpty(lastName)) {
                         lastName = char.ToUpper(lastName[0]) + lastName.Substring(1).ToLower();
                     }
                     
                     Console.WriteLine($"\nEnter {firstName}'s birthday: (DD-MM-YYYY): ");
-                    string birthday = Console.ReadLine() ?? "Unknown";
+                    string birthday = Console.ReadLine() ?? "None";
 
                     Console.WriteLine("\nPlease enter a description of your gift idea.");
                     string giftDescription = Console.ReadLine() ?? "None";
@@ -110,7 +125,8 @@ class Program
                     string recordEntry = $"Name: {firstName} {lastName}\nBirthday: {birthday}\nGift Idea: {giftDescription}\nVendor: {vendorName}\nVendor URL: {vendorURL}\nPrice Range: {priceRange}";
                     Console.WriteLine(recordEntry);
                     
-                    Console.WriteLine("\nIs this correct?\n('yes' to save data OR 'no' to return to editing): ");
+                    // Record.ConfirmEntry(): Confirm data entry and save to file
+                    Console.WriteLine("\nIs this correct?\n('yes' to save data OR 'no' to re-enter data): ");
                     string confirmation = Console.ReadLine()!.ToLower();
 
                     if(confirmation=="yes")
