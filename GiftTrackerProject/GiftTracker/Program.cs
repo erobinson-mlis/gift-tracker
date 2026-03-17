@@ -37,14 +37,8 @@ class Program
                     File.WriteAllText(filePath, "");
                     Console.WriteLine("\nNew datafile created.\nPlease return to menu to enter add records.");
 
-                    string main_menu;
-                    // Load data from filePath
-                    do
-                    {
-                        Console.WriteLine("\nEnter 'return' to return to menu:");
-                        main_menu = Console.ReadLine()!;
-                        main_menu.ToLower();
-                    } while (main_menu != "return");
+                    Console.WriteLine("\nPress any key to return to menu:");
+                    Console.ReadKey();
                 } // end if
 
                 else {
@@ -61,7 +55,7 @@ class Program
                         Console.WriteLine($"\n{fileContents}");
                     }
 
-                    Console.WriteLine("Press any key to return to menu:");
+                    Console.WriteLine("\nPress any key to return to menu:");
                     Console.ReadKey();
                 } // end else
 
