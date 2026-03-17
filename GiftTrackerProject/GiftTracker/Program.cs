@@ -48,22 +48,21 @@ class Program
                 } // end if
 
                 else {
-                    string command; 
-                    string fileContents = File.ReadAllText("gifttracker-data.txt");
                     // Load data from filePath
-                    do {
-                        Console.Clear();
-                        Console.WriteLine("Loading data from file...");
-                        // Check length of data file and display file empty if no contents
-                        if(fileContents.Length < 1) {
-                            Console.WriteLine("\nData file is currently empty.\nReturn to menu to add new records.");
-                        } // end if
+                    string fileContents = File.ReadAllText("gifttracker-data.txt");
+                    Console.Clear();
+                    Console.WriteLine("Loading data from file...");
+                    // Check length of data file and display file empty if no contents
+                    if(fileContents.Length < 1) {
+                        Console.WriteLine("\nData file is currently empty.\nReturn to menu to add new records.");
+                    } // end if
 
+                    if(fileContents.Length > 1) {
                         Console.WriteLine($"\n{fileContents}");
+                    }
 
-                        Console.WriteLine("Enter 'return' to return to menu:");
-                        command = Console.ReadLine()!.ToLower();
-                    } while(command != "return");
+                    Console.WriteLine("Press any key to return to menu:");
+                    Console.ReadKey();
                 } // end else
 
 
@@ -142,10 +141,10 @@ class Program
                         break;
                     }
                     
-                    Console.WriteLine("\nEnter 'return' to return to menu or 'new' to add another new record: ");
+                    Console.WriteLine("\nEnter 'menu' to return to menu or 'new' to add another new record: ");
                     command = Console.ReadLine()!.ToLower();
 
-                } while(command != "return");
+                } while(command != "menu");
 
             } // record data loop
 
