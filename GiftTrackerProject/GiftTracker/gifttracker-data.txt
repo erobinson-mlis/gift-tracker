@@ -1,7 +1,7 @@
-Name: Eric 
+Name: Eric Robinson
 Birthday: 
 Gift Idea: 
-Vendor: 
-Vendor URL: 
+Vendor: amazon
+Vendor URL:         amazon.com
 Price Range: 
 
