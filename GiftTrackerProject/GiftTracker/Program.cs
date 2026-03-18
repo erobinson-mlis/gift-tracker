@@ -22,6 +22,7 @@ class Program
         do {
             // Prompt to select mode
             ConsoleUI.DisplayMenu();
+            
             mode = Console.ReadLine()!.ToLower();
             
             if(mode=="view") {        
