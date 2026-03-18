@@ -135,7 +135,7 @@ class Program
         Console.WriteLine("\nPlease confirm the data below:\n");
         Console.WriteLine(record);
                     
-        string confirmation = AskForInput("\nIs this correct?\n('yes' to save data OR 'no' to re-enter data): ")!.ToLower();
+        string confirmation = AskForInput("Is this correct?\n('yes' to save data OR 'no' to re-enter data): ")!.ToLower();
 
         if(confirmation=="yes")
         {
