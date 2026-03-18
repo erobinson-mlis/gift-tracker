@@ -77,7 +77,7 @@ class Program
                     string recordEntry = $"Name: {firstName} {lastName}\nBirthday: {birthday}\nGift Idea: {giftDescription}\nVendor: {vendorName}\nVendor URL: {vendorURL}\nPrice Range: {priceRange}\n";
                     
                     // Record.ConfirmEntry(): Confirm data entry and save to file
-                    ConfirmEntry("gifttracker-data.txt", recordEntry);
+                    Record.ConfirmEntry("gifttracker-data.txt", recordEntry);
                     
                     command = AskForInput("\nEnter 'menu' to return to menu or 'add' to add another new record: ").ToLower();
 
@@ -94,123 +94,8 @@ class Program
         return Console.ReadLine() ?? "None";
     } // end AskForInput method
 
-    public static string ConfirmEntry(string filePath, string record)
-    {
-        // Confirm data entry and save to file
-        Console.Clear();
-        Console.WriteLine("\nPlease confirm the data below:\n");
-        Console.WriteLine(record);
-                    
-        string confirmation = AskForInput("Is this correct?\n('yes' to save data OR 'no' to re-enter data): ")!.ToLower();
 
-        if(confirmation=="yes")
-        {
-            Console.Clear();
-            filePath = "gifttracker-data.txt";
-            Console.WriteLine("\nSaving data to file...\n");
-            Console.WriteLine(record);
-            File.AppendAllText(filePath, $"{record}\n");
-            Console.WriteLine("Data saved successfully!");
-            return "yes";
-        } // end if
-
-        if (confirmation == "no")
-        {
-            Console.WriteLine("\nLet's re-enter the data...\n");
-            return "no";
-            //ADD DATA ENTRY LOGIC HERE
-        } // end if
-
-        else {
-            Console.WriteLine("\nInvalid input. Please enter 'yes' to save data or 'no' to re-enter data.");
-            return ConfirmEntry(filePath, record);
-        } // end else
-    } // end ConfirmEntry method
 } //class Program
 
-public class ConsoleUI {
-
-     public void DisplayWelcomeMessage() {
-        Console.Clear();
-        Console.WriteLine("🎁GiftTracker🎁\n\nWelcome to GiftTracker, an app for storing names,\nbirthdays, and gift idea information to simplify\ngift idea tracking");
-        Console.WriteLine("\nPress any key to continue.");
-        Console.ReadKey();
-        return;
-    }
-
-     public void DisplayMenu() {
-        Console.Clear();
-        Console.Write("🎁GiftTracker🎁\n\nPlease select mode:\n  'view' to view records\n  'add' to enter new records\n  'exit' to exit the app\n> ");
-     }
-
-     public void DisplayData(string data) {
-        Console.Clear();
-        Console.WriteLine("Loading data from file...");
-        if(data.Length < 1) {
-            Console.WriteLine("\nData file is currently empty.\nReturn to menu to add new records.");
-        } // end if
-
-        if(data.Length > 1) {
-            Console.WriteLine($"\n{data}");
-        }
-
-        Console.WriteLine("\nPress any key to return to menu:");
-        Console.ReadKey();
-    } // end DisplayData method
-} // end class ConsoleUI
 
 
-public class FileSaver{
-    string filePath = "gifttracker-data.txt";
-
-    public void CreateFile(string filePath) {
-        this.filePath = filePath;
-        File.Create(filePath).Close();
-        Console.WriteLine("\nNo datafile present.\n>>> Creating new datafile...");
-        File.WriteAllText(filePath, "");
-        Console.WriteLine("\nNew datafile created.\nPlease return to menu to enter add records.");
-        Console.WriteLine("\nPress any key to return to menu:");
-        Console.ReadKey();
-        return;
-    }
-
-    public void SaveData(string filePath, string record)
-    {   
-        this.filePath = filePath;
-        Console.Clear();
-        Console.WriteLine("\nSaving data to file...");
-        Console.WriteLine(record);
-        File.AppendAllText(filePath, record);
-        Console.WriteLine("Data saved successfully!");
-        return;
-    }
-}
-
-public class Record {
-    public static void ViewData() {
-        string filePath = "gifttracker-data.txt";
-
-        if (!File.Exists(filePath))
-        {
-            new FileSaver().CreateFile(filePath);
-        } // end if
-
-        else {
-            // Load data from filePath
-            string fileContents = File.ReadAllText("gifttracker-data.txt");
-            Console.Clear();
-            Console.WriteLine("Loading data from file...");
-            // Check length of data file and display file empty if no contents
-            if(fileContents.Length < 1) {
-                Console.WriteLine("\nData file is currently empty.\nReturn to menu to add new records.");
-            } // end if
-
-            if(fileContents.Length > 1) {
-                Console.WriteLine($"\n{fileContents}");
-            }
-
-            Console.WriteLine("Press any key to return to menu:");
-            Console.ReadKey();
-        } // end else
-    } // view data method
-} // end class Record
