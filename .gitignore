@@ -5,7 +5,7 @@
 
 # dotenv files
 .env
-GiftTrackerProject/GiftTracker/gifttracker-data.txt
+gifttracker-data.txt
 
 # User-specific files
 *.rsuser
