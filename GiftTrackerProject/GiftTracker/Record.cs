@@ -31,7 +31,68 @@ public class Record {
     } // view data method
 
 
-    public static void ConfirmEntry(string filePath, string record)
+    public static void CreateNewRecord() {
+        string command; 
+
+        do {
+            // Enter record data for gift recipient
+            Console.Clear();
+            Console.WriteLine("Let's create a new record...");
+
+            Console.WriteLine("\nEnter first name: ");
+            string firstName= Console.ReadLine()!;
+
+            // Check if the input is null or empty
+            bool isValid = false;
+            if (string.IsNullOrEmpty(firstName))
+                do {
+                    
+                    Console.WriteLine("We need a name to track your gift ideas!\nPlease enter a valid (non-empty) first name:");
+                    firstName = Console.ReadLine()!;
+                
+                    if (!string.IsNullOrEmpty(firstName))
+                    {
+                        isValid = true;
+                    }
+            } while(!isValid);
+
+            if (firstName != null) {
+                firstName = char.ToUpper(firstName[0]) + firstName.Substring(1).ToLower();
+            }
+
+            Console.Clear();
+            string lastName = Program.AskForInput("\nEnter last name (optional): ");
+            if (!string.IsNullOrEmpty(lastName)) {
+                lastName = char.ToUpper(lastName[0]) + lastName.Substring(1).ToLower();
+            }
+            
+            Console.Clear();
+            string birthday = Program.AskForInput($"\nEnter {firstName}'s birthday: (DD-MM-YYYY): ");
+
+            Console.Clear();
+            string giftDescription = Program.AskForInput("\nPlease enter a description of your gift idea: ");
+
+            Console.Clear();
+            string vendorName = Program.AskForInput("\nEnter an optional vendor who sells this gift: ");
+
+            Console.Clear();
+            string vendorURL = Program.AskForInput("\nEnter an optional online vendor URL: ");
+
+            Console.Clear();
+            string priceRange = Program.AskForInput("\nEnter an optional price range for the gift (e.g. $50-$100): ");
+
+            Console.Clear();
+            string recordEntry = $"Name: {firstName} {lastName}\nBirthday: {birthday}\nGift Idea: {giftDescription}\nVendor: {vendorName}\nVendor URL: {vendorURL}\nPrice Range: {priceRange}\n";
+            
+            // Confirm data entry and save to file
+            ConfirmNewEntry("gifttracker-data.txt", recordEntry);
+            
+            command = Program.AskForInput("\nEnter 'menu' to return to menu or 'add' to add another new record: ").ToLower();
+
+        } while(command != "menu");
+    } // end CreateNewRecord() method
+
+    public static void ConfirmNewEntry(string filePath, string record)
     {
         // Confirm data entry and save to file
         Console.Clear();
@@ -61,8 +122,8 @@ public class Record {
 
         else {
             Console.WriteLine("\nInvalid input. Please enter 'yes' to save data or 'no' to re-enter data.");
-            ConfirmEntry(filePath, record);
+            ConfirmNewEntry(filePath, record);
         } // end else
-    } // end ConfirmEntry method
+    } // end ConfirmNewEntry() method
 
 } // end class Record
