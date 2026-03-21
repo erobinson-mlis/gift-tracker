@@ -30,6 +30,12 @@ public class ConsoleUI {
         Console.ReadKey();
     } // end DisplayData() method
 
+    public static string AskForInput(string prompt)
+    {
+        Console.WriteLine(prompt);
+        return Console.ReadLine() ?? "None";
+    } // end AskForInput method
+
     public void DisplayGoodbyeMessage() {
         Console.WriteLine("\nThank you for using GiftTracker! Goodbye!");
     } // end DisplayGoodbyeMessage() method

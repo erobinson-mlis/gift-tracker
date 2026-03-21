@@ -61,25 +61,25 @@ public class Record {
             }
 
             Console.Clear();
-            string lastName = Program.AskForInput("\nEnter last name (optional): ");
+            string lastName = ConsoleUI.AskForInput("\nEnter last name (optional): ");
             if (!string.IsNullOrEmpty(lastName)) {
                 lastName = char.ToUpper(lastName[0]) + lastName.Substring(1).ToLower();
             }
             
             Console.Clear();
-            string birthday = Program.AskForInput($"\nEnter {firstName}'s birthday: (DD-MM-YYYY): ");
+            string birthday = ConsoleUI.AskForInput($"\nEnter {firstName}'s birthday: (DD-MM-YYYY): ");
 
             Console.Clear();
-            string giftDescription = Program.AskForInput("\nPlease enter a description of your gift idea: ");
+            string giftDescription = ConsoleUI.AskForInput("\nPlease enter a description of your gift idea: ");
 
             Console.Clear();
-            string vendorName = Program.AskForInput("\nEnter an optional vendor who sells this gift: ");
+            string vendorName = ConsoleUI.AskForInput("\nEnter an optional vendor who sells this gift: ");
 
             Console.Clear();
-            string vendorURL = Program.AskForInput("\nEnter an optional online vendor URL: ");
+            string vendorURL = ConsoleUI.AskForInput("\nEnter an optional online vendor URL: ");
 
             Console.Clear();
-            string priceRange = Program.AskForInput("\nEnter an optional price range for the gift (e.g. $50-$100): ");
+            string priceRange = ConsoleUI.AskForInput("\nEnter an optional price range for the gift (e.g. $50-$100): ");
 
             Console.Clear();
             string recordEntry = $"Name: {firstName} {lastName}\nBirthday: {birthday}\nGift Idea: {giftDescription}\nVendor: {vendorName}\nVendor URL: {vendorURL}\nPrice Range: {priceRange}\n";
@@ -87,7 +87,7 @@ public class Record {
             // Confirm data entry and save to file
             ConfirmNewEntry("gifttracker-data.txt", recordEntry);
             
-            command = Program.AskForInput("\nEnter 'menu' to return to menu or 'add' to add another new record: ").ToLower();
+            command = ConsoleUI.AskForInput("\nEnter 'menu' to return to menu or 'add' to add another new record: ").ToLower();
 
         } while(command != "menu");
     } // end CreateNewRecord() method
@@ -99,7 +99,7 @@ public class Record {
         Console.WriteLine("\nPlease confirm the data below:\n");
         Console.WriteLine(record);
                     
-        string confirmation = Program.AskForInput("Is this correct?\n('yes' to save data OR 'no' to re-enter data): ")!.ToLower();
+        string confirmation = ConsoleUI.AskForInput("Is this correct?\n('yes' to save data OR 'no' to re-enter data): ")!.ToLower();
 
         if(confirmation=="yes")
         {
