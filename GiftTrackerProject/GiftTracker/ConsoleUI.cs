@@ -4,7 +4,7 @@ public class ConsoleUI {
 
      public void DisplayWelcomeMessage() {
         Console.Clear();
-        Console.WriteLine("🎁GiftTracker🎁\n\nWelcome to GiftTracker, an app for storing names,\nbirthdays, and gift idea information to simplify\ngift idea tracking");
+        Console.WriteLine("🎁GiftTracker🎁\n\nWelcome to GiftTracker, an app for storing names,\nbirthdays, and gift idea information to simplify\ngift idea tracking.");
         Console.WriteLine("\nPress any key to continue.");
         Console.ReadKey();
         return;
@@ -28,5 +28,10 @@ public class ConsoleUI {
 
         Console.WriteLine("\nPress any key to return to menu:");
         Console.ReadKey();
-    } // end DisplayData method
+    } // end DisplayData() method
+
+    public void DisplayGoodbyeMessage() {
+        Console.WriteLine("\nThank you for using GiftTracker! Goodbye!");
+    } // end DisplayGoodbyeMessage() method
+
 } // end class ConsoleUI
