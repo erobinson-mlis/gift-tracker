@@ -24,9 +24,8 @@ public class Record {
                 Console.WriteLine($"Error reading file: {e.Message}");
             }
         }
-
-        ConsoleUI.PressAnyKeyToContinue();
         
+        ConsoleUI.PressAnyKeyToContinue();
     } // end ViewAllRecords() method
 
 
@@ -93,14 +92,15 @@ public class Record {
         Console.WriteLine("\nPlease confirm the data below:\n");
         Console.WriteLine(record);
 
-        string confirmation;
-        do {
-            confirmation = AnsiConsole.Prompt(
-                new SelectionPrompt<string>()
-                    .Title("Is this correct")
-                    .AddChoices(new[] {"yes", "no", "cancel"}));
+        while (true)
+        {
+            string confirmation = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("Is this correct")
+                .AddChoices(new[] {"yes", "no", "cancel"}));
 
-            if(confirmation=="yes") {        
+            switch (confirmation) {
+            case "yes":
                 // TODO: FileSaver.SaveRecord(record)
                 Console.Clear();
                 filePath = "gifttracker-data.txt";
@@ -110,16 +110,18 @@ public class Record {
                 Console.WriteLine("Data saved successfully!");
                 ConsoleUI.PressAnyKeyToContinue();
                 return;
-            } // end if
 
-            if(confirmation=="no") {
-                Console.WriteLine("\nLet's re-enter the data...\n");
+            case "no":
+                Console.WriteLine("\nReturn to the menu to re-enter this record...\n");
+                ConsoleUI.PressAnyKeyToContinue();
                 //TODO: ADD DATA ENTRY LOGIC HERE
                 //TODO:Loop back to data entry if user selects 'no' and add option to return to menu
                 return;
-            } // end if
 
-        } while(confirmation != "cancel");
+            case "cancel":
+                return;
+            }
+        }
 
     } // end ConfirmNewEntry() method
 
