@@ -14,35 +14,17 @@ class Program
     static void Main(string[] args)
     {
         // Print welcome message
-        ConsoleUI ConsoleUI = new ConsoleUI();
-        ConsoleUI.DisplayWelcomeMessage();
+        ConsoleUI ui = new ConsoleUI();
 
-        string mode;
+        // Display welcome splash page
+        ui.DisplayWelcomeMessage();
+
         // Mode selection loop
-        do {
-            // Prompt to select mode
-            ConsoleUI.DisplayMenu();
-            
-            mode = Console.ReadLine()!.ToLower();
-            
-            if(mode=="view") {        
-                Record.ViewData(); // Load data from file for display
-            }
+        ui.DisplayMenu();
 
-            if(mode=="add") {
-                Record.CreateNewRecord(); // Create new record and save to file
-            }
-
-        } while(mode != "exit"); // mode selection loop
-
-        ConsoleUI.DisplayGoodbyeMessage();
+        // Confirm signout with goodbye message
+        ui.DisplayGoodbyeMessage();
     }
-
-    public static string AskForInput(string prompt)
-    {
-        Console.WriteLine(prompt);
-        return Console.ReadLine() ?? "None";
-    } // end AskForInput method
 
 } //class Program
 
