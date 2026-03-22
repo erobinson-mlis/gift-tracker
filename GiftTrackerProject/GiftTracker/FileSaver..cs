@@ -8,9 +8,6 @@ public class FileSaver{
         File.Create(filePath).Close();
         Console.WriteLine("\nNo datafile present.\n>>> Creating new datafile...");
         File.WriteAllText(filePath, "");
-        Console.WriteLine("\nNew datafile created.\nPlease return to menu to enter add records.");
-        Console.WriteLine("\nPress any key to return to menu:");
-        Console.ReadKey();
         return;
     }
 
