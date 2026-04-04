@@ -63,25 +63,8 @@ public class Record {
         } // end if
         
         Console.Clear();
-        DateTime birthday;
-        string birthdayString;
-
-        // Loop until the user provides a valid date in dd-MM-yyyy format
-        while (true)
-        {
-            birthdayString = ConsoleUI.AskForInput($"\nEnter {firstName}'s birthday: (DD-MM-YYYY): ");
-
-            if (DateTime.TryParseExact(birthdayString, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out birthday))
-            {
-                // Validation succeeded
-                break; 
-            }
-    
-            Console.WriteLine("Invalid format. Please enter the date as DD-MM-YYYY (e.g., 31-12-2010).");
-        }
-
-  
-
+        string birthday = getValidBirthday(firstName!);
+        
         Console.Clear();
         string giftDescription = ConsoleUI.AskForInput("\nPlease enter a description of your gift idea: ");
 
@@ -139,7 +122,21 @@ public class Record {
                 return;
             }
         }
-
     } // end ConfirmNewEntry() method
 
+    public static string getValidBirthday(string firstName) {
+        DateTime birthday;
+        string birthdayString;
+        // Loop until the user provides a valid date in dd-MM-yyyy format
+        while (true)
+        {
+            birthdayString = ConsoleUI.AskForInput($"\nEnter {firstName}'s birthday: (DD-MM-YYYY): ");
+            if (DateTime.TryParseExact(birthdayString, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out birthday))
+            {
+                break; 
+            }
+            Console.WriteLine("Invalid format. Please enter the date as DD-MM-YYYY (e.g., 31-12-2010).");
+        }
+        return birthday.ToString();
+    }
 } // end class Record
