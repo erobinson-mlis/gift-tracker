@@ -63,7 +63,24 @@ public class Record {
         } // end if
         
         Console.Clear();
-        string birthday = ConsoleUI.AskForInput($"\nEnter {firstName}'s birthday: (DD-MM-YYYY): ");
+        DateTime birthday;
+        string birthdayString;
+
+        // Loop until the user provides a valid date in dd-MM-yyyy format
+        while (true)
+        {
+            birthdayString = ConsoleUI.AskForInput($"\nEnter {firstName}'s birthday: (DD-MM-YYYY): ");
+
+            if (DateTime.TryParseExact(birthdayString, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out birthday))
+            {
+                // Validation succeeded
+                break; 
+            }
+    
+            Console.WriteLine("Invalid format. Please enter the date as DD-MM-YYYY (e.g., 31-12-2010).");
+        }
+
+  
 
         Console.Clear();
         string giftDescription = ConsoleUI.AskForInput("\nPlease enter a description of your gift idea: ");
