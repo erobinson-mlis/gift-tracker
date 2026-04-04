@@ -2,6 +2,8 @@ namespace GiftTracker;
 
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices.Swift;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using Spectre.Console;
 
 public class Record {
@@ -78,10 +80,13 @@ public class Record {
         string priceRange = ConsoleUI.AskForInput("\nEnter an optional price range for the gift (e.g. $50-$100): ");
 
         Console.Clear();
-        string recordEntry = $"Name: {firstName} {lastName}\nBirthday: {birthday}\nGift Idea: {giftDescription}\nVendor: {vendorName}\nVendor URL: {vendorURL}\nPrice Range: {priceRange}\n";
+        string recordDisplay = $"Name: {firstName} {lastName}\nBirthday: {birthday}\nGift Idea: {giftDescription}\nVendor: {vendorName}\nVendor URL: {vendorURL}\nPrice Range: {priceRange}\n";
+
+        var jsonRecord = new {firstName=firstName, lastName=lastName, birthday=birthday, giftDescription=giftDescription, vendorName=vendorName, vendorURL=vendorURL, priceRandge=priceRange};
+        var jsonString = JsonSerializer.Serialize(jsonRecord);
         
         // Confirm data entry and save to file
-        ConfirmNewEntry("gifttracker-data.txt", recordEntry);
+        ConfirmNewEntry("gifttracker-data.txt", jsonString);
 
     } // end CreateNewRecord() method
 
