@@ -82,7 +82,7 @@ public class Record {
         Console.Clear();
         string recordDisplay = $"Name: {firstName} {lastName}\nBirthday: {birthday}\nGift Idea: {giftDescription}\nVendor: {vendorName}\nVendor URL: {vendorURL}\nPrice Range: {priceRange}\n";
 
-        var jsonRecord = new {firstName=firstName, lastName=lastName, birthday=birthday, giftDescription=giftDescription, vendorName=vendorName, vendorURL=vendorURL, priceRandge=priceRange};
+        var jsonRecord = new {firstName, lastName, birthday, giftDescription, vendorName, vendorURL, priceRange};
         var jsonString = JsonSerializer.Serialize(jsonRecord);
         
         // Confirm data entry and save to file
