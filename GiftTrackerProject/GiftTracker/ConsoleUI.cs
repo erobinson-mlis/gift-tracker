@@ -6,6 +6,7 @@ namespace GiftTracker;
 public class ConsoleUI() {
 
      public void DisplayWelcomeMessage() {
+        // Displays a splash page welcome message when the program is loaded.
         Console.Clear();
         string title = "🎁GiftTracker🎁\n";
         string welcome = "Welcome to GiftTracker, an app for storing names, birthdays, and gift ideas to simplify gift idea tracking.\n";
@@ -20,6 +21,8 @@ public class ConsoleUI() {
 
 
      public void DisplayMenu() {
+        // Loops over the main menu selection screen;
+        // presents menu choices for hierarchical function choices.
         while (true) // this loop keeps the menu active
         {
             Console.Clear();
@@ -47,6 +50,9 @@ public class ConsoleUI() {
 
 
      public static void DisplayFileData(string data) {
+        // accepts a string of loaded file data and displays it to the screen
+        // Accepts:
+        // string data : data loaded from the file to be displayed
         if(data.Length < 1) {
             Console.WriteLine("\nData file is currently empty.\nReturn to menu to add new records.");
         } // end if
@@ -60,13 +66,21 @@ public class ConsoleUI() {
 
     public static string AskForInput(string prompt)
     {
+        // Generic function for presenting a prompt to the user 
+        // and accepting input to be returned and saved as a variable
+        // Accepts
+        // string prompt : the prompt to the user
+        // 
         Console.WriteLine(prompt);
-        return Console.ReadLine() ?? "None";
+        string response = Console.ReadLine() ?? "None";
+        return response;
     } // end AskForInput method
     
     
     public static void PressAnyKeyToContinue()
     {
+        // Halts screen presentation and waits for user to press
+        // a key before clearning the screen and continuing
         Console.WriteLine("\nPress any key to continue.");
         Console.ReadKey();
         return;
@@ -74,6 +88,7 @@ public class ConsoleUI() {
 
 
     public void DisplayGoodbyeMessage() {
+        // Presents a simple signout message when exiting the program
         Console.WriteLine("\nThank you for using GiftTracker! Goodbye!\n");
     } // end DisplayGoodbyeMessage() method
 

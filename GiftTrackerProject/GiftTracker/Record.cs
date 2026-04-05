@@ -6,6 +6,7 @@ using Spectre.Console;
 
 public class Record {
     public static void ViewAllRecords() {
+        // 
         string filePath = "gifttracker-data.txt";
 
         if (!File.Exists(filePath))
@@ -30,7 +31,9 @@ public class Record {
 
 
     public static void CreateNewRecord() {
-        // Enter record data for gift recipient
+        // Creates record data for gift recipient by prompting
+        // the user to enter data into  several data fields, 
+        // and passes the data to confirmRecord() be confirmed and saved
         Console.Clear();
         Console.WriteLine("Let's create a new record...");
 
@@ -89,11 +92,16 @@ public class Record {
     {
         // Confirm data entry and save to file
         Console.Clear();
+
+        // Prompts the user with entered data record and solicits
+        // confimation of the correct data. 
         Console.WriteLine("\nPlease confirm the data below:\n");
         Console.WriteLine(record);
 
         while (true)
         {
+            // Prompts user with a yes/no selection menu to 
+            // confirm presented data
             string confirmation = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
                 .Title("Is this correct")
@@ -101,7 +109,7 @@ public class Record {
 
             switch (confirmation) {
             case "yes":
-                // TODO: FileSaver.SaveRecord(record)
+                // if yes, saves data to the datafile at filePath
                 Console.Clear();
                 filePath = "gifttracker-data.txt";
                 Console.WriteLine("\nSaving data to file...\n");
@@ -112,6 +120,7 @@ public class Record {
                 return;
 
             case "no":
+                // if no, retuns user to main menu
                 Console.WriteLine("\nReturn to the menu to re-enter this record...\n");
                 ConsoleUI.PressAnyKeyToContinue();
                 //TODO: ADD DATA ENTRY LOGIC HERE
@@ -119,22 +128,27 @@ public class Record {
                 return;
 
             case "cancel":
+                // if cancel, cancels entry and returns user to main menu
                 return;
             }
         }
     } // end ConfirmNewEntry() method
 
     public static string getValidBirthday(string firstName) {
+        // Validates the entry for birthday variable to ensure 
+        // that variable is convertable to DateTime type
         DateTime birthday;
         string birthdayString;
         // Loop until the user provides a valid date in dd-MM-yyyy format
         while (true)
         {
+            // checks that the birthday variable is in DateTime formtat
             birthdayString = ConsoleUI.AskForInput($"\nEnter {firstName}'s birthday: (DD-MM-YYYY): ");
             if (DateTime.TryParseExact(birthdayString, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out birthday))
             {
                 break; 
             }
+            // Reprompts user to enter the birthday in DateTime format.
             Console.WriteLine("Invalid format. Please enter the date as DD-MM-YYYY (e.g., 31-12-2010).");
         }
         return birthday.ToString();

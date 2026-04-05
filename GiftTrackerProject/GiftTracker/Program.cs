@@ -24,6 +24,7 @@ class Program
 
         // Confirm signout with goodbye message
         ui.DisplayGoodbyeMessage();
+        
     }
 
 } //class Program
