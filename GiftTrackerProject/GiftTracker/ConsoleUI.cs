@@ -1,5 +1,9 @@
 using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 using Spectre.Console;
+using System.Text.Json.Serialization;
+using System.Xml.Serialization;
+using System.Text.Json;
 
 namespace GiftTracker;
 
