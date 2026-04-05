@@ -8,7 +8,7 @@ public class FileSaver{
         File.Create(filePath).Close();
         Console.WriteLine("\nNo datafile present.\n>>> Creating new datafile...");
         string emptyJson = "{\n}";
-        File.AppendAllText(filePath,emptyJson);
+        File.AppendAllText(filePath, emptyJson);
         return;
     }
 
