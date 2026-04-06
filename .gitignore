@@ -6,6 +6,7 @@
 # dotenv files
 .env
 gifttracker-data.txt
+user-account.txt
 
 # User-specific files
 *.rsuser

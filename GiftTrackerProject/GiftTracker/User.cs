@@ -34,6 +34,13 @@ public static class User{
     public static void AddUser()
     {
         string userFilePath = "user-account.txt";
+        // Loads data from userFilePath and displays to screen
+        if (!File.Exists(userFilePath))
+        {
+            FileSaver.CreateFile(userFilePath);
+
+        } // end if
+
         string fileContents = File.ReadAllText(userFilePath);
         if (fileContents.Length <= 2)
         {
@@ -42,7 +49,7 @@ public static class User{
         
         else
         {
-            Console.WriteLine("User account file has already been created.\nOnly one user account is currently allowed.");
+            Console.WriteLine("User account file has already been created.\nOnly one user account is currently allowed.\n");
             while (true)
             {
                 // Prompts user with a yes/no selection menu to 
