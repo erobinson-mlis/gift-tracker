@@ -2,6 +2,8 @@ using System.ComponentModel.Design;
 using System.IO;
 using System.Threading.Tasks.Dataflow;
 using Spectre.Console;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
 
 namespace GiftTracker;
 
@@ -120,8 +122,37 @@ public static class User{
             userLastName = char.ToUpper(userLastName[0]) + userLastName.Substring(1).ToLower();
         } // end if
 
-        Console.Clear();
-        string userEmail = ConsoleUI.AskForInput("\nPlease enter your email address: ");
+
+        // Get valid email address (using regex pattern match)
+        string userEmail;
+        bool emailIsValid = false;
+        do
+        {
+            userEmail = ConsoleUI.AskForInput("\nPlease enter your email address: ");
+            try
+            {
+                // Validate format using MailAddress
+                var addr = new MailAddress(userEmail);
+                emailIsValid = addr.Address == userEmail;
+            }
+            catch
+            {
+                emailIsValid = false;
+            }
+
+            if (!emailIsValid)
+            {
+                Console.WriteLine("Invalid email format. Please try again.");
+            }
+
+        } while (!emailIsValid); // Loop until input is valid
+
+
+
+
+
+
+
 
         Console.Clear();
         string userSMS = ConsoleUI.AskForInput("\nEnter your telephone number: ");
