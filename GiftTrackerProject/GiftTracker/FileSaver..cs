@@ -4,7 +4,7 @@ using Spectre.Console;
 namespace GiftTracker;
 
 public class FileSaver{
-    public static int CheckFileExists(string filePath)
+    public static void CheckFileExists(string filePath)
     {
         // Checks for existence of passed filePath
         // if it doesn't exist, create it
@@ -12,9 +12,9 @@ public class FileSaver{
             CreateFile(filePath);
             Console.WriteLine("New file successfully created. ");
             ConsoleUI.PressAnyKeyToContinue();
-            return 0;
+            return;
         } // end if
-        return 0;
+        return;
     } // end CheckFileExists()
 
     public static void CreateFile(string filePath) {
