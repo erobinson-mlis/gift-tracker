@@ -46,13 +46,46 @@ public class ConsoleUI() {
 
                 case "User account":
                     // Edit user account information for syncing
-                    User.UserAccountMenu();
+                    ConsoleUI.UserAccountMenu();
                     break;
 
                 case "Exit":
                     inMenu = false;
                     return;
                 
+            }
+        }
+    } // end DisplayMenu() method
+
+
+     public static void UserAccountMenu() {
+        // Loops over the user account menu selection screen;
+        // presents menu choices adding users viewing user info 
+        bool inSubMenu = true;
+        while (inSubMenu == true) // this loop keeps the menu active
+        {
+            Console.Clear();
+            string userAccountMode = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("Select mode")
+                    .AddChoices(new[] {"Add user", "View user account", "Go back"}));
+            
+            switch (userAccountMode)
+            {
+                case "Add user":   
+                    // Load all data from file for display     
+                    User.AddUser(); 
+                    break;
+
+                case "View user account":
+                    // Create new record and save to datafile
+                    User.ViewUserAccount(); 
+                    break;
+
+                case "Go back":
+                    // Return to main selection menu
+                    inSubMenu = false;
+                    break;
             }
         }
     } // end DisplayMenu() method

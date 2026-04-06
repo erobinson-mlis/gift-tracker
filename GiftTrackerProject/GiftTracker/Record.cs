@@ -25,7 +25,6 @@ public class Record {
                 Console.WriteLine($"Error reading file: {e.Message}");
             }
         }
-        
         ConsoleUI.PressAnyKeyToContinue();
     } // end ViewAllRecords() method
 
