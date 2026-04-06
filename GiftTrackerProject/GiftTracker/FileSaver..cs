@@ -1,26 +1,39 @@
+using System.IO;
+using Spectre.Console;
+
 namespace GiftTracker;
 
 public class FileSaver{
-    string filePath = "gifttracker-data.txt";
+    public static int CheckFileExists(string filePath)
+    {
+        // Checks for existence of passed filePath
+        // if it doesn't exist, create it
+        if (!File.Exists(filePath)) {
+            CreateFile(filePath);
+            Console.WriteLine("New file successfully created. ");
+            ConsoleUI.PressAnyKeyToContinue();
+            return 0;
+        } // end if
+        return 0;
+    } // end CheckFileExists()
 
-    public void CreateFile(string filePath) {
+    public static void CreateFile(string filePath) {
         // Creates a datafile and saves it to the local 
         // project folder for accepting saved records
         // Accepts:
-        // filePath : the path to the datafile
-        this.filePath = filePath;
+        //     filePath : the path to the datafile
+        Console.WriteLine("\nNo file present.\n>>> Creating new file...");
+
         File.Create(filePath).Close();
-        Console.WriteLine("\nNo datafile present.\n>>> Creating new datafile...");
         File.WriteAllText(filePath, "");
         return;
-    }
+    } // End CreateFile()
 
-    public void SaveData(string filePath, string record) {   
+    public static void SaveData(string filePath, string record) {   
         // Writes a data record to the datafile
         // Accepts:
         // filePath : the path to the datafile
         // record : a string record to be saved to the datafile
-        this.filePath = filePath;
         Console.Clear();
         Console.WriteLine("\nSaving data to file...");
         Console.WriteLine(record);
