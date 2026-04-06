@@ -6,12 +6,12 @@ using Spectre.Console;
 
 public class Record {
     public static void ViewAllRecords() {
-        // 
+        // Loads data from datafile and displays to screen
         string filePath = "gifttracker-data.txt";
 
         if (!File.Exists(filePath))
         {
-            new FileSaver().CreateFile(filePath);
+            FileSaver.CreateFile(filePath);
 
         } // end if
 
@@ -25,26 +25,23 @@ public class Record {
                 Console.WriteLine($"Error reading file: {e.Message}");
             }
         }
-        
         ConsoleUI.PressAnyKeyToContinue();
     } // end ViewAllRecords() method
 
 
     public static void CreateNewRecord() {
-        // Creates record data for gift recipient by prompting
-        // the user to enter data into  several data fields, 
-        // and passes the data to confirmRecord() be confirmed and saved
+        // Creates record data for gift recipient by prompting the user to enter data into several data fields, and passes the data to confirmRecord() be confirmed and saved
         Console.Clear();
         Console.WriteLine("Let's create a new record...");
 
-        Console.WriteLine("\nEnter first name: ");
+        Console.WriteLine("\nEnter the gift recipient's first name: ");
         string firstName= Console.ReadLine()!;
 
         // Check if the input is null or empty
         bool isValid = false;
         if (string.IsNullOrEmpty(firstName)) {
             do {
-                Console.WriteLine("We need a name to track your gift ideas!\nPlease enter a valid (non-empty) first name:");
+                Console.WriteLine("We need a name to attach to your gift ideas!\nPlease enter a valid (non-empty) first name:");
                 firstName = Console.ReadLine()!;
             
                 if (!string.IsNullOrEmpty(firstName))

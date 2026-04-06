@@ -22,28 +22,70 @@ public class ConsoleUI() {
 
      public void DisplayMenu() {
         // Loops over the main menu selection screen;
-        // presents menu choices for hierarchical function choices.
-        while (true) // this loop keeps the menu active
+        // presents menu choices for hierarchical function choices.\
+        bool inMenu = true;
+        while (inMenu == true) // this loop keeps the menu active
         {
             Console.Clear();
-            string mode = AnsiConsole.Prompt(
+            string mainMenuMode = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("Please select mode")
-                    .AddChoices(new[] {"View all records", "Add new record", "Close"}));
+                    .AddChoices(new[] {"View all records", "Add new record", "User account", "Exit"}));
             
-            switch (mode)
+            switch (mainMenuMode)
             {
-                case "View all records":        
-                    Record.ViewAllRecords(); // Load data from file for display
+                case "View all records":   
+                    // Load all data from file for display     
+                    Record.ViewAllRecords(); 
                     break;
 
                 case "Add new record":
-                    Record.CreateNewRecord(); // Create new record and save to 
+                    // Create new record and save to datafile
+                    Record.CreateNewRecord(); 
                     break;
 
-                case "Close":
+                case "User account":
+                    // Edit user account information for syncing
+                    ConsoleUI.UserAccountMenu();
+                    break;
+
+                case "Exit":
+                    inMenu = false;
                     return;
                 
+            }
+        }
+    } // end DisplayMenu() method
+
+
+     public static void UserAccountMenu() {
+        // Loops over the user account menu selection screen;
+        // presents menu choices adding users viewing user info 
+        bool inSubMenu = true;
+        while (inSubMenu == true) // this loop keeps the menu active
+        {
+            Console.Clear();
+            string userAccountMode = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("Select mode")
+                    .AddChoices(new[] {"Add user", "View user account", "Go back"}));
+            
+            switch (userAccountMode)
+            {
+                case "Add user":   
+                    // Load all data from file for display     
+                    User.AddUser(); 
+                    break;
+
+                case "View user account":
+                    // Create new record and save to datafile
+                    User.ViewUserAccount(); 
+                    break;
+
+                case "Go back":
+                    // Return to main selection menu
+                    inSubMenu = false;
+                    break;
             }
         }
     } // end DisplayMenu() method
