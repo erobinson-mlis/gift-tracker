@@ -23,7 +23,7 @@ public class ConsoleUI() {
     } // end DisplayWelcomeMessage() method
 
 
-     public void DisplayMenu() {
+     public static async Task DisplayMenu() {
         while (true) // this loop keeps the menu active
         {
             Console.Clear();
@@ -34,30 +34,33 @@ public class ConsoleUI() {
             
             switch (mode)
             {
-                case "View all records":        
-                    Record.ViewAllRecords(); // Load data from file for display
+                case "View all records":
+                    // Load data from file for display    
+                    Record.ViewAllRecords(); 
                     break;
 
                 case "Add new record":
-                    Record.CreateNewRecord(); // Create new record and save to 
+                    // Create new record and save to 
+                    Record.CreateNewRecord(); 
                     break;
 
                 case "Close":
+                    // Close the program and exit
                     return;
-                
             }
         }
     } // end DisplayMenu() method
 
 
-     public static void DisplayFileData(string data) {
-        if(data.Length < 1) {
+    public static void DisplayFileData(string data) {
+        if(data.Length < 5) {
             Console.WriteLine("\nData file is currently empty.\nReturn to menu to add new records.");
-        } // end if
+            } // end if
 
-        if(data.Length > 1) {
-            Console.WriteLine($"\n{data}");
-        }
+        else if(data.Length > 1) {
+             Console.WriteLine($"\n{data}");
+        } // end else
+        
         return;
     } // end DisplayData() method
 
@@ -72,7 +75,7 @@ public class ConsoleUI() {
     public static void PressAnyKeyToContinue()
     {
         Console.WriteLine("\nPress any key to continue.");
-        Console.ReadKey();
+        _ = Console.ReadKey();
         return;
     }
 

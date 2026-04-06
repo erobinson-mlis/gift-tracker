@@ -11,16 +11,16 @@ using System.Transactions;
 
 class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         // Print welcome message
-        ConsoleUI ui = new ConsoleUI();
+        ConsoleUI ui = new();
 
         // Display welcome splash page
         ui.DisplayWelcomeMessage();
 
         // Mode selection loop
-        ui.DisplayMenu();
+        await ConsoleUI.DisplayMenu();
 
         // Confirm signout with goodbye message
         ui.DisplayGoodbyeMessage();

@@ -1,0 +1,10 @@
+{
+	{"firstName":"Emily","lastName":"Lopez","birthday":"21-05-1982","giftDescription":"Dinner out","vendorName":"Town Circle","vendorURL":"town-circle.com","priceRange":"$200.00"},
+
+	{"firstName":"Kerry","lastName":"Stockwell","birthday":"23-08-1948","giftDescription":"Dining set","vendorName":"Raymour","vendorURL":"raymour.com","priceRange":"$300.00"},
+
+	{"firstName":"Laura","lastName":"Williams","birthday":"23-04-1967","giftDescription":"Hugs","vendorName":"Me","vendorURL":"erobinson.com","priceRange":"$0.00"},
+
+	{"firstName":"Eric","lastName":"Robinson","birthday":"11/12/1971 12:00:00\u202FAM","giftDescription":"LLM books","vendorName":"Manning","vendorURL":"manning.com","priceRange":"$100.00"},
+	
+}
