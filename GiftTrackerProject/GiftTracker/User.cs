@@ -42,7 +42,7 @@ public static class User{
         
         else
         {
-            Console.WriteLine("User account file has already been created. ");
+            Console.WriteLine("User account file has already been created.\nOnly one user account is currently allowed.");
             while (true)
             {
                 // Prompts user with a yes/no selection menu to 
@@ -78,7 +78,7 @@ public static class User{
 
         string userFilePath = "user-account.txt";
         Console.Clear();
-        Console.WriteLine("Let's create a new user...");
+        Console.WriteLine("Let's add your user information...");
         File.WriteAllText(userFilePath, "");
         Console.WriteLine("\nEnter the user's first name: ");
         string userFirstName = Console.ReadLine()!;
@@ -89,7 +89,7 @@ public static class User{
         {
             do
             {
-                Console.WriteLine("We need a name to attach to your gift ideas!\nPlease enter a valid (non-empty) first name:");
+                Console.WriteLine("We need a name to attach to your user account.");
                 userFirstName = Console.ReadLine()!;
 
                 if (!string.IsNullOrEmpty(userFirstName))
