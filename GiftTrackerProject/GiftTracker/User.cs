@@ -129,19 +129,15 @@ public static class User{
         do
         {
             userEmail = ConsoleUI.AskForInput("\nPlease enter your email address: ");
-            try
-            {
+            try {
                 // Validate format using MailAddress
                 var addr = new MailAddress(userEmail);
                 emailIsValid = addr.Address == userEmail;
-            }
-            catch
-            {
+            } catch {
                 emailIsValid = false;
             }
 
-            if (!emailIsValid)
-            {
+            if (!emailIsValid) {
                 Console.WriteLine("Invalid email format. Please try again.");
             }
 
@@ -151,11 +147,28 @@ public static class User{
 
 
 
-
-
-
         Console.Clear();
-        string userSMS = ConsoleUI.AskForInput("\nEnter your telephone number: ");
+        // Get valid telephone number for SMS
+        string userSMS;
+         // Regex for format XXX-XXX-XXXX
+        string pattern = @"^\d{3}-\d{3}-\d{4}$"; 
+        do
+        {
+            userSMS = ConsoleUI.AskForInput("\nEnter your telephone number: ");
+            if (!Regex.IsMatch(userSMS, pattern))
+            {
+                Console.WriteLine("Invalid format. Please enter a 10-digit number (###-###-####).");
+            }
+        } 
+        while (!Regex.IsMatch(userSMS, pattern));
+
+        Console.WriteLine($"Valid number entered: {userSMS}");
+
+
+
+
+
+
 
 
         Console.Clear();
