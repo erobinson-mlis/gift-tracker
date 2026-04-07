@@ -13,17 +13,19 @@ public static class User{
     {
         string userFilePath = "user-account.txt";
         
-        // check for existing of user data filee
+        // check for existing of user data file
         FileSaver.CheckFileExists(userFilePath);
         ConsoleUI.PressAnyKeyToContinue();
+
+        // Display user account information
         ConsoleUI.DisplayFileData(userFilePath);
+        ConsoleUI.PressAnyKeyToContinue();
     }
 
 
     public static void EditUser()
     {
         string userFilePath = "user-account.txt";
-       
         
         FileSaver.CheckFileExists(userFilePath);
 
@@ -100,7 +102,7 @@ public static class User{
         string userFilePath = "user-account.txt";
         Console.Clear();
         Console.WriteLine("Let's add/edit your user information...");
-        File.WriteAllText(userFilePath, "");
+        // Removed: File.WriteAllText(userFilePath, ""); - will clear in ConfirmNewEntry if confirmed
 
         // First name
         Console.WriteLine($"\nEnter the user's first name{(string.IsNullOrEmpty(defaultFirstName) ? "" : $" (current: {defaultFirstName})")}: ");
@@ -226,7 +228,7 @@ public static class User{
                 Console.Clear();
                 Console.WriteLine("\nSaving user account information to file...\n");
                 Console.WriteLine(userData);
-                File.AppendAllText(userFilePath, $"{userData}\n");
+                File.WriteAllText(userFilePath, $"{userData}\n");
                 Console.WriteLine("Data saved successfully!");
                 ConsoleUI.PressAnyKeyToContinue();
                 return;
