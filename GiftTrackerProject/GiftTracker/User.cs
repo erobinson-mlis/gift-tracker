@@ -57,9 +57,7 @@ public static class User{
                 }
             }
 
-            Console.WriteLine("Current user account information:");
-            Console.WriteLine(fileContents);
-            Console.WriteLine();
+
 
             while (true)
             {
