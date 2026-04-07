@@ -1,20 +1,32 @@
-using System.IO;
-using Spectre.Console;
+using System.Runtime.InteropServices;
 
 namespace GiftTracker;
 
 public class FileSaver{
-    public static void CheckFileExists(string filePath)
+    
+    static string filePath = "gifttracker-data.txt";
+
+    public static int CheckFileExists(string filePath)
     {
         // Checks for existence of passed filePath
         // if it doesn't exist, create it
-        if (!File.Exists(filePath)) {
-            CreateFile(filePath);
-            Console.WriteLine("New file successfully created. ");
-            ConsoleUI.PressAnyKeyToContinue();
-            return;
+        if (!File.Exists(filePath))
+        {
+            FileSaver.CreateFile(filePath);
+            return 0;
         } // end if
-        return;
+        else { 
+            try
+            {
+                ConsoleUI.DisplayFileData(filePath);
+                return 0;
+            } catch {
+                Console.WriteLine("Error accessing the file.");
+                return 1; 
+            }
+        }
+        
+
     } // end CheckFileExists()
 
     public static void CreateFile(string filePath) {
@@ -29,7 +41,8 @@ public class FileSaver{
         return;
     } // End CreateFile()
 
-    public static void SaveData(string filePath, string record) {   
+    public static void SaveData(string filePath, string record)
+    {
         // Writes a data record to the datafile
         // Accepts:
         // filePath : the path to the datafile

@@ -11,37 +11,21 @@ namespace GiftTracker;
 public static class User{
     public static void ViewUserAccount()
     {
-        // Loads data from userFilePath and displays to screen
         string userFilePath = "user-account.txt";
-        if (!File.Exists(userFilePath))
-        {
-            FileSaver.CreateFile(userFilePath);
-
-        } // end if
-
-        else {
-            try {
-                Console.WriteLine("Loading data from file..."); 
-                string fileContents = File.ReadAllText(userFilePath); 
-                ConsoleUI.DisplayFileData(fileContents); 
-            } 
-            catch (IOException e) {
-                Console.WriteLine($"Error reading file: {e.Message}");
-            }
-        }
+        
+        // check for existing of user data filee
+        FileSaver.CheckFileExists(userFilePath);
         ConsoleUI.PressAnyKeyToContinue();
+        ConsoleUI.DisplayFileData(userFilePath);
     }
 
 
     public static void AddUser()
     {
         string userFilePath = "user-account.txt";
-        // Loads data from userFilePath and displays to screen
-        if (!File.Exists(userFilePath))
-        {
-            FileSaver.CreateFile(userFilePath);
-
-        } // end if
+       
+        
+        FileSaver.CheckFileExists(userFilePath);
 
         string fileContents = File.ReadAllText(userFilePath);
         if (fileContents.Length <= 2)
