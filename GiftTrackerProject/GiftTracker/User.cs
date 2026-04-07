@@ -129,7 +129,7 @@ public static class User{
             userLastName = char.ToUpper(userLastName[0]) + userLastName.Substring(1).ToLower();
         } // end if
 
-
+        Console.Clear();
         // Get valid email address (using regex pattern match)
         string userEmail;
         bool emailIsValid = false;
