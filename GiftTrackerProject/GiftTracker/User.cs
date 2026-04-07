@@ -15,11 +15,6 @@ public static class User{
         
         // check for existing of user data file
         FileSaver.CheckFileExists(userFilePath);
-        ConsoleUI.PressAnyKeyToContinue();
-
-        // Display user account information
-        ConsoleUI.DisplayFileData(userFilePath);
-        ConsoleUI.PressAnyKeyToContinue();
     }
 
 
@@ -99,7 +94,6 @@ public static class User{
         // Creates or edits user account data for application user to store
         // email address and sms contact for future enhancements
 
-        string userFilePath = "user-account.txt";
         Console.Clear();
         Console.WriteLine("Let's add/edit your user information...");
         // Removed: File.WriteAllText(userFilePath, ""); - will clear in ConfirmNewEntry if confirmed
@@ -172,7 +166,7 @@ public static class User{
         Console.Clear();
         // Get valid telephone number for SMS
         string userSMS;
-         // Regex for format XXX-XXX-XXXX
+        // Regex for format XXX-XXX-XXXX
         string pattern = @"^\d{3}-\d{3}-\d{4}$"; 
         do
         {
@@ -230,13 +224,11 @@ public static class User{
                 Console.WriteLine(userData);
                 File.WriteAllText(userFilePath, $"{userData}\n");
                 Console.WriteLine("Data saved successfully!");
-                ConsoleUI.PressAnyKeyToContinue();
                 return;
 
             case "no":
                 // if no, retuns user to main menu
                 Console.WriteLine("\nReturn to the menu to re-enter this user...\n");
-                ConsoleUI.PressAnyKeyToContinue();
                 //TODO: ADD DATA ENTRY LOGIC HERE
                 //TODO:Loop back to data entry if user selects 'no' and add option to return to menu
                 return;

@@ -38,7 +38,8 @@ public class ConsoleUI() {
             {
                 case "View all records":   
                     // Load all data from file for display     
-                    Record.ViewAllRecords(filePath); 
+                    Record.ViewAllRecords(filePath);
+                    ConsoleUI.PressAnyKeyToContinue();
                     break;
 
                 case "Add new record":
@@ -75,13 +76,16 @@ public class ConsoleUI() {
             switch (userAccountMode)
             {
                 case "View user account":
-                    // Create new record and save to datafile
-                    User.ViewUserAccount(); 
+                    // Load user account data from file for display 
+                    User.ViewUserAccount();
+                    ConsoleUI.PressAnyKeyToContinue();
                     break;
 
                 case "Edit user account":   
-                    // Load all data from file for display     
-                    User.EditUser(); 
+                    // Create new record and save to datafile
+    
+                    User.EditUser();
+                    ConsoleUI.PressAnyKeyToContinue();
                     break;
                 
                 case "Go back":

@@ -10,8 +10,6 @@ public class Record {
         // Loads data from datafile and displays to screen
 
         FileSaver.CheckFileExists(filePath);
-
-        ConsoleUI.PressAnyKeyToContinue();
     } // end ViewAllRecords() method
 
     public static void CreateNewRecord() {

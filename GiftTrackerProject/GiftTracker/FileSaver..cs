@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 
 namespace GiftTracker;
@@ -17,8 +18,7 @@ public class FileSaver{
         {
             FileSaver.CreateFile(filePath);
         } // end if
-        try {
-            ConsoleUI.DisplayFileData(filePath);
+        try {ConsoleUI.DisplayFileData(filePath);
         } catch {
             Console.WriteLine("Error accessing the file.");
         }
