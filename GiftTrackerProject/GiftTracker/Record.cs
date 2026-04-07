@@ -5,29 +5,6 @@ using System.Runtime.InteropServices.Swift;
 using Spectre.Console;
 
 public class Record {
-    public static void ViewAllRecords() {
-        // Loads data from datafile and displays to screen
-        string filePath = "gifttracker-data.txt";
-
-        if (!File.Exists(filePath))
-        {
-            FileSaver.CreateFile(filePath);
-
-        } // end if
-
-        else {
-            try {
-                Console.WriteLine("Loading data from file..."); 
-                string fileContents = File.ReadAllText(filePath); 
-                ConsoleUI.DisplayFileData(fileContents); 
-            } 
-            catch (IOException e) {
-                Console.WriteLine($"Error reading file: {e.Message}");
-            }
-        }
-        ConsoleUI.PressAnyKeyToContinue();
-    } // end ViewAllRecords() method
-
 
     public static void CreateNewRecord() {
         // Creates record data for gift recipient by prompting the user to enter data into several data fields, and passes the data to confirmRecord() be confirmed and saved
@@ -36,8 +13,7 @@ public class Record {
 
         Console.WriteLine("\nEnter the gift recipient's first name: ");
         string firstName= Console.ReadLine()!;
-
-        // Check if the input is null or empty
+        // Check if the input is null; first name is required.
         bool isValid = false;
         if (string.IsNullOrEmpty(firstName)) {
             do {
@@ -51,33 +27,29 @@ public class Record {
 
             } while(!isValid);
         } // end if
-
+        // Convert first name to 'title' Upper
         if (firstName != null) {
             firstName = char.ToUpper(firstName[0]) + firstName.Substring(1).ToLower();
         } // end if
 
         Console.Clear();
         string lastName = ConsoleUI.AskForInput("\nEnter last name (optional): ");
+        // Convert last name to 'title' Upper
         if (!string.IsNullOrEmpty(lastName)) {
             lastName = char.ToUpper(lastName[0]) + lastName.Substring(1).ToLower();
         } // end if
-        
         Console.Clear();
         string birthday = getValidBirthday(firstName!);
-        
         Console.Clear();
         string giftDescription = ConsoleUI.AskForInput("\nPlease enter a description of your gift idea: ");
-
         Console.Clear();
         string vendorName = ConsoleUI.AskForInput("\nEnter an optional vendor who sells this gift: ");
-
         Console.Clear();
         string vendorURL = ConsoleUI.AskForInput("\nEnter an optional online vendor URL: ");
-
         Console.Clear();
         string priceRange = ConsoleUI.AskForInput("\nEnter an optional price range for the gift (e.g. $50-$100): ");
-
         Console.Clear();
+
         string recordEntry = $"Name: {firstName} {lastName}\nBirthday: {birthday}\nGift Idea: {giftDescription}\nVendor: {vendorName}\nVendor URL: {vendorURL}\nPrice Range: {priceRange}\n";
         
         // Confirm data entry and save to file
@@ -109,10 +81,7 @@ public class Record {
                 // if yes, saves data to the datafile at filePath
                 Console.Clear();
                 filePath = "gifttracker-data.txt";
-                Console.WriteLine("\nSaving data to file...\n");
-                Console.WriteLine(record);
-                File.AppendAllText(filePath, $"{record}\n");
-                Console.WriteLine("Data saved successfully!");
+                FileSaver.SaveData(filePath, record);
                 ConsoleUI.PressAnyKeyToContinue();
                 return;
 
@@ -150,4 +119,9 @@ public class Record {
         }
         return birthday.ToString();
     }
+
+    public static void ViewAllRecords(string filePath) {
+        // Loads data from datafile and displays to screen
+        FileSaver.CheckFileExists(filePath);
+    } // end ViewAllRecords() method
 } // end class Record

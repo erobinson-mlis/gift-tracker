@@ -1,20 +1,27 @@
-using System.IO;
-using Spectre.Console;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
 
 namespace GiftTracker;
 
 public class FileSaver{
-    public static void CheckFileExists(string filePath)
+    private readonly string _filePath;
+
+    public FileSaver(string filePath)
     {
+        _filePath = filePath;
+    }
+
+    public static void CheckFileExists(string filePath) {
         // Checks for existence of passed filePath
         // if it doesn't exist, create it
-        if (!File.Exists(filePath)) {
-            CreateFile(filePath);
-            Console.WriteLine("New file successfully created. ");
-            ConsoleUI.PressAnyKeyToContinue();
-            return;
+        if (!File.Exists(filePath))
+        {
+            FileSaver.CreateFile(filePath);
         } // end if
-        return;
+        try {ConsoleUI.DisplayFileData(filePath);
+        } catch {
+            Console.WriteLine("Error accessing the file.");
+        }
     } // end CheckFileExists()
 
     public static void CreateFile(string filePath) {
@@ -26,19 +33,21 @@ public class FileSaver{
 
         File.Create(filePath).Close();
         File.WriteAllText(filePath, "");
-        return;
     } // End CreateFile()
 
-    public static void SaveData(string filePath, string record) {   
+    public static void SaveData(string filePath, string record)
+    {
         // Writes a data record to the datafile
         // Accepts:
         // filePath : the path to the datafile
         // record : a string record to be saved to the datafile
         Console.Clear();
+        
+        CheckFileExists(filePath);
+
         Console.WriteLine("\nSaving data to file...");
         Console.WriteLine(record);
         File.AppendAllText(filePath, record);
         Console.WriteLine("Data saved successfully!");
-        return;
     }
 }

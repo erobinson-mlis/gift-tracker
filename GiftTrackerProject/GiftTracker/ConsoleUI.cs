@@ -4,6 +4,7 @@ using Spectre.Console;
 namespace GiftTracker;
 
 public class ConsoleUI() {
+    static string filePath = "gifttracker-data.txt";
 
      public void DisplayWelcomeMessage() {
         // Displays a splash page welcome message when the program is loaded.
@@ -23,6 +24,7 @@ public class ConsoleUI() {
      public void DisplayMenu() {
         // Loops over the main menu selection screen;
         // presents menu choices for hierarchical function choices.\
+
         bool inMenu = true;
         while (inMenu == true) // this loop keeps the menu active
         {
@@ -36,7 +38,8 @@ public class ConsoleUI() {
             {
                 case "View all records":   
                     // Load all data from file for display     
-                    Record.ViewAllRecords(); 
+                    Record.ViewAllRecords(filePath);
+                    ConsoleUI.PressAnyKeyToContinue();
                     break;
 
                 case "Add new record":
@@ -68,20 +71,23 @@ public class ConsoleUI() {
             string userAccountMode = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("Select mode")
-                    .AddChoices(new[] {"Add user", "View user account", "Go back"}));
+                    .AddChoices(new[] {"View user account", "Edit user account", "Go back"}));
             
             switch (userAccountMode)
             {
-                case "Add user":   
-                    // Load all data from file for display     
-                    User.AddUser(); 
-                    break;
-
                 case "View user account":
-                    // Create new record and save to datafile
-                    User.ViewUserAccount(); 
+                    // Load user account data from file for display 
+                    User.ViewUserAccount();
+                    ConsoleUI.PressAnyKeyToContinue();
                     break;
 
+                case "Edit user account":   
+                    // Create new record and save to datafile
+    
+                    User.EditUser();
+                    ConsoleUI.PressAnyKeyToContinue();
+                    break;
+                
                 case "Go back":
                     // Return to main selection menu
                     inSubMenu = false;
@@ -91,16 +97,20 @@ public class ConsoleUI() {
     } // end DisplayMenu() method
 
 
-     public static void DisplayFileData(string data) {
+     public static void DisplayFileData(string filePath) {
         // accepts a string of loaded file data and displays it to the screen
         // Accepts:
         // string data : data loaded from the file to be displayed
-        if(data.Length < 1) {
+
+        Console.WriteLine("Loading data from file..."); 
+                string fileContents = File.ReadAllText(filePath); 
+                
+        if(fileContents.Length < 1) {
             Console.WriteLine("\nData file is currently empty.\nReturn to menu to add new records.");
         } // end if
 
-        if(data.Length > 1) {
-            Console.WriteLine($"\n{data}");
+        if(fileContents.Length > 1) {
+            Console.WriteLine($"\n{fileContents}");
         }
         return;
     } // end DisplayData() method
