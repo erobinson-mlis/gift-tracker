@@ -1,28 +1,33 @@
 ﻿namespace GiftTracker.Tests;
 
+using System.Diagnostics.Contracts;
 using System.Reflection;
 using GiftTracker;
 
 public class FileSaverTests
 {
-    FileSaver myFileSaver;
-    string testFilePath;
-    string testDataString;
 
-    public void FileSaverTests()
-    {
-        myFileSaver = new FileSaver();
-        testFilePath = "test-file.txt";
-        testDataString = "Bob Smith";
+    FileSaver fileSaver;
+    string filePath;
+
+    public FileSaverTests() {
+        filePath = "test-data.txt";
+        fileSaver = new FileSaver(filePath);
     }
 
     [Fact]
-    public void Test_SaveData() {   
-        // Saves data string to a file at testFilePath; Ensures that the content is written to the file, and that the updated file is the appropriate length
+    public void Test_SaveData()
+    {
+        // Writes a test "record" to the data filePath, then loads the data to ensure it matches
 
-        myFileSaver.SaveData(testFilePath, testDataString);
-        var contentFromFile = File.ReadAllText(testFilePath);
-        
-        Assert.Equal("Bob Smith", contentFromFile);
+        // Clear the file first
+        File.WriteAllText(filePath, "");
+        // Write the data to the filePath
+        fileSaver.SaveData(filePath, "Bob Smith");
+        // Load data from filePath
+        var contents = File.ReadAllText(filePath);
+
+        // Compare to ensure thay are equal
+        Assert.Equal("Bob Smith", contents);
     }
 }

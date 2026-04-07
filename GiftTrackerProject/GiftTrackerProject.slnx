@@ -1,2 +1,4 @@
 <Solution>
+  <Project Path="GiftTracker.Tests/GiftTracker.Tests.csproj" />
+  <Project Path="GiftTracker/GiftTracker.csproj" />
 </Solution>

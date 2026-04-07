@@ -70,20 +70,20 @@ public class ConsoleUI() {
             string userAccountMode = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("Select mode")
-                    .AddChoices(new[] {"Add user", "View user account", "Go back"}));
+                    .AddChoices(new[] {"View user account", "Edit user account", "Go back"}));
             
             switch (userAccountMode)
             {
-                case "Add user":   
-                    // Load all data from file for display     
-                    User.AddUser(); 
-                    break;
-
                 case "View user account":
                     // Create new record and save to datafile
                     User.ViewUserAccount(); 
                     break;
 
+                case "Edit user account":   
+                    // Load all data from file for display     
+                    User.EditUser(); 
+                    break;
+                
                 case "Go back":
                     // Return to main selection menu
                     inSubMenu = false;

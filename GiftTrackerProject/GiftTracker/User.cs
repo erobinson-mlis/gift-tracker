@@ -20,7 +20,7 @@ public static class User{
     }
 
 
-    public static void AddUser()
+    public static void EditUser()
     {
         string userFilePath = "user-account.txt";
        
@@ -35,20 +35,48 @@ public static class User{
         
         else
         {
-            Console.WriteLine("User account file has already been created.\nOnly one user account is currently allowed.\n");
+            // Parse existing data
+            var lines = fileContents.Trim().Split('\n');
+            string existingFirstName = "";
+            string existingLastName = "";
+            string existingEmail = "";
+            string existingSMS = "";
+
+            foreach (var line in lines)
+            {
+                if (line.StartsWith("Name: "))
+                {
+                    var nameParts = line.Substring(6).Split(' ');
+                    if (nameParts.Length >= 1) existingFirstName = nameParts[0];
+                    if (nameParts.Length >= 2) existingLastName = string.Join(" ", nameParts.Skip(1));
+                }
+                else if (line.StartsWith("Email: "))
+                {
+                    existingEmail = line.Substring(7);
+                }
+                else if (line.StartsWith("Telephone/SMS number: "))
+                {
+                    existingSMS = line.Substring(22);
+                }
+            }
+
+            Console.WriteLine("Current user account information:");
+            Console.WriteLine(fileContents);
+            Console.WriteLine();
+
             while (true)
             {
                 // Prompts user with a yes/no selection menu to 
                 // confirm presented data
-                string overwriteApproved = AnsiConsole.Prompt(
+                string editApproved = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
-                    .Title("Would you like to overwrite the data?")
+                    .Title("Would you like to edit the existing data?")
                     .AddChoices(new[] { "yes", "no", "cancel" }));
 
-                switch (overwriteApproved)
+                switch (editApproved)
                 {
                     case "yes":
-                        PromptUserAccountEntry();
+                        PromptUserAccountEntry(existingFirstName, existingLastName, existingEmail, existingSMS);
                         return;
 
                     case "no":
@@ -61,46 +89,47 @@ public static class User{
                 }
             }
         }
-    } // end CreateNewRecord() method
+    } // end EditUser() method
 
 
-    public static void PromptUserAccountEntry()
+    public static void PromptUserAccountEntry(string defaultFirstName = "", string defaultLastName = "", string defaultEmail = "", string defaultSMS = "")
     {
-        // Creates user account data for application user to store
+        // Creates or edits user account data for application user to store
         // email address and sms contact for future enhancements
 
         string userFilePath = "user-account.txt";
         Console.Clear();
-        Console.WriteLine("Let's add your user information...");
+        Console.WriteLine("Let's add/edit your user information...");
         File.WriteAllText(userFilePath, "");
-        Console.WriteLine("\nEnter the user's first name: ");
-        string userFirstName = Console.ReadLine()!;
 
-        // Check if the input is null or empty
-        bool isValid = false;
-        if (string.IsNullOrEmpty(userFirstName))
+        // First name
+        Console.WriteLine($"\nEnter the user's first name{(string.IsNullOrEmpty(defaultFirstName) ? "" : $" (current: {defaultFirstName})")}: ");
+        string userFirstName = Console.ReadLine()!;
+        if (string.IsNullOrEmpty(userFirstName) && !string.IsNullOrEmpty(defaultFirstName))
         {
-            do
+            userFirstName = defaultFirstName;
+        }
+        else if (string.IsNullOrEmpty(userFirstName))
+        {
+            while (string.IsNullOrEmpty(userFirstName))
             {
                 Console.WriteLine("We need a name to attach to your user account.");
                 userFirstName = Console.ReadLine()!;
-
-                if (!string.IsNullOrEmpty(userFirstName))
-                {
-                    isValid = true;
-                }
-
-            } while (!isValid);
-        } // end if
+            }
+        }
 
         // Convert first name to Title case 
-        if (userFirstName != null)
+        if (!string.IsNullOrEmpty(userFirstName))
         {
             userFirstName = char.ToUpper(userFirstName[0]) + userFirstName.Substring(1).ToLower();
-        } // end if
+        }
 
         Console.Clear();
-        string userLastName = ConsoleUI.AskForInput("\nEnter last name (optional): ");
+        string userLastName = ConsoleUI.AskForInput($"\nEnter last name (optional{(string.IsNullOrEmpty(defaultLastName) ? "" : $", current: {defaultLastName}")}) : ");
+        if (string.IsNullOrEmpty(userLastName) && !string.IsNullOrEmpty(defaultLastName))
+        {
+            userLastName = defaultLastName;
+        }
         if (!string.IsNullOrEmpty(userLastName))
         {
             userLastName = char.ToUpper(userLastName[0]) + userLastName.Substring(1).ToLower();
@@ -112,19 +141,26 @@ public static class User{
         bool emailIsValid = false;
         do
         {
-            userEmail = ConsoleUI.AskForInput("\nPlease enter your email address: ");
-            try {
-                // Validate format using MailAddress
-                var addr = new MailAddress(userEmail);
-                emailIsValid = addr.Address == userEmail;
-            } catch {
-                emailIsValid = false;
+            userEmail = ConsoleUI.AskForInput($"\nPlease enter your email address{(string.IsNullOrEmpty(defaultEmail) ? "" : $" (current: {defaultEmail})")}: ");
+            if (string.IsNullOrEmpty(userEmail) && !string.IsNullOrEmpty(defaultEmail))
+            {
+                userEmail = defaultEmail;
+                emailIsValid = true;
             }
+            else
+            {
+                try {
+                    // Validate format using MailAddress
+                    var addr = new MailAddress(userEmail);
+                    emailIsValid = addr.Address == userEmail;
+                } catch {
+                    emailIsValid = false;
+                }
 
-            if (!emailIsValid) {
-                Console.WriteLine("Invalid email format. Please try again.");
+                if (!emailIsValid) {
+                    Console.WriteLine("Invalid email format. Please try again.");
+                }
             }
-
         } while (!emailIsValid); // Loop until input is valid
 
 
@@ -138,8 +174,12 @@ public static class User{
         string pattern = @"^\d{3}-\d{3}-\d{4}$"; 
         do
         {
-            userSMS = ConsoleUI.AskForInput("\nEnter your telephone number: ");
-            if (!Regex.IsMatch(userSMS, pattern))
+            userSMS = ConsoleUI.AskForInput($"\nEnter your telephone number{(string.IsNullOrEmpty(defaultSMS) ? "" : $" (current: {defaultSMS})")}: ");
+            if (string.IsNullOrEmpty(userSMS) && !string.IsNullOrEmpty(defaultSMS))
+            {
+                userSMS = defaultSMS;
+            }
+            else if (!Regex.IsMatch(userSMS, pattern))
             {
                 Console.WriteLine("Invalid format. Please enter a 10-digit number (###-###-####).");
             }
@@ -205,10 +245,4 @@ public static class User{
             }
         }
     } // end ConfirmNewEntry() method
-
-
-    private static void EditUser()
-    {
-        throw new NotImplementedException();
-    }
 }
