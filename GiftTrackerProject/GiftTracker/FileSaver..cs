@@ -35,7 +35,7 @@ public class FileSaver{
         File.WriteAllText(filePath, "");
     } // End CreateFile()
 
-    public void SaveData(string filePath, string record)
+    public static void SaveData(string filePath, string record)
     {
         // Writes a data record to the datafile
         // Accepts:

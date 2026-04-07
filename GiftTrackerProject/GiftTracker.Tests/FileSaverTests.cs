@@ -6,13 +6,10 @@ using GiftTracker;
 
 public class FileSaverTests
 {
-
-    FileSaver fileSaver;
     string filePath;
 
     public FileSaverTests() {
         filePath = "test-data.txt";
-        fileSaver = new FileSaver(filePath);
     }
 
     [Fact]
@@ -22,12 +19,12 @@ public class FileSaverTests
 
         // Clear the file first
         File.WriteAllText(filePath, "");
-        // Write the data to the filePath
-        fileSaver.SaveData(filePath, "Bob Smith");
+        // Call the static SaveData method
+        FileSaver.SaveData(filePath, "Bob Smith");
         // Load data from filePath
         var contents = File.ReadAllText(filePath);
 
-        // Compare to ensure thay are equal
+        // Compare to ensure they are equal
         Assert.Equal("Bob Smith", contents);
     }
 }
