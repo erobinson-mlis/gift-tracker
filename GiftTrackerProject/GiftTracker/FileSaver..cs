@@ -17,10 +17,10 @@ public class FileSaver{
         if (!File.Exists(filePath))
         {
             FileSaver.CreateFile(filePath);
-        } // end if
-        try {ConsoleUI.DisplayFileData(filePath);
-        } catch {
-            Console.WriteLine("Error accessing the file.");
+        }
+        else
+        {
+            return;
         }
     } // end CheckFileExists()
 
@@ -50,4 +50,13 @@ public class FileSaver{
         File.AppendAllText(filePath, record);
         Console.WriteLine("Data saved successfully!");
     }
+
+    // public static string LoadData(string filepath);{
+    //     try {ConsoleUI.DisplayFileData(filePath);
+    //     } catch {
+    //         Console.WriteLine("Error accessing the file.");
+    //     }
+
+    //     return string 
+    // }
 }

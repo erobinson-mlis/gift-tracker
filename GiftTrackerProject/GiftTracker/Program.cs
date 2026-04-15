@@ -23,11 +23,6 @@ class Program
         ui.DisplayMenu();
 
         // Confirm signout with goodbye message
-        ui.DisplayGoodbyeMessage();
-        
+        ui.DisplayGoodbyeMessage();        
     }
-
 } //class Program
-
-
-
