@@ -119,11 +119,4 @@ public class Record {
         }
         return birthday.ToString();
     }
-
-    public static void ViewAllRecords(string filePath) {
-        // Loads data from datafile and displays to screen
-        FileSaver.CheckFileExists(filePath);
-
-        Fi
-    } // end ViewAllRecords() method
 } // end class Record
