@@ -9,12 +9,12 @@ namespace GiftTracker;
 
 
 public static class User{
-    public static void ViewUserAccount()
+    public static void ViewUserAccount(string userFilePath)
     {
-        string userFilePath = "user-account.txt";
-        
+       
         // check for existing of user data file
         FileSaver.CheckFileExists(userFilePath);
+        ConsoleUI.DisplayFileData(userFilePath);
     }
 
 
@@ -181,13 +181,6 @@ public static class User{
         while (!Regex.IsMatch(userSMS, pattern));
 
         Console.WriteLine($"Valid number entered: {userSMS}");
-
-
-
-
-
-
-
 
         Console.Clear();
         string userEntry = $"Name: {userFirstName} {userLastName}\nEmail: {userEmail}\nTelephone/SMS number: {userSMS}\n";

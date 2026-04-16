@@ -26,7 +26,7 @@ public class UserTests
         File.WriteAllText(userFilePath, testAccountInfo);
 
         // Call ViewUserAccount - it should display the data without throwing
-        User.ViewUserAccount();
+        User.ViewUserAccount(userFilePath);
 
         // Since it displays to console, we can't easily test output, but ensure no exception
         Assert.True(true); // Placeholder - the call above should not throw
