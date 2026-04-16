@@ -5,6 +5,7 @@ namespace GiftTracker;
 
 public class ConsoleUI() {
     static string filePath = "gifttracker-data.txt";
+    static string userFilePath = "user-account.txt";
 
      public void DisplayWelcomeMessage() {
         // Displays a splash page welcome message when the program is loaded.
@@ -37,7 +38,8 @@ public class ConsoleUI() {
             switch (mainMenuMode)
             {
                 case "View all records":   
-                    // Load all data from file for display     
+                    // Load all data from file for display   
+                    FileSaver.CheckFileExists(filePath);
                     DisplayFileData(filePath);
                     PressAnyKeyToContinue();
                     break;
@@ -77,7 +79,7 @@ public class ConsoleUI() {
             {
                 case "View user account":
                     // Load user account data from file for display 
-                    User.ViewUserAccount();
+                    User.ViewUserAccount(userFilePath);
                     PressAnyKeyToContinue();
                     break;
 
