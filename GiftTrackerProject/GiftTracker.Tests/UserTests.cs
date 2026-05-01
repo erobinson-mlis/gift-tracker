@@ -25,10 +25,9 @@ public class UserTests
         string testAccountInfo = "Name: Bob Smith\nEmail: bob.smith@gmail.com\nTelephone/SMS number: 555-212-2121\n";
         File.WriteAllText(userFilePath, testAccountInfo);
 
-        // Call ViewUserAccount - it should display the data without throwing
-        User.ViewUserAccount(userFilePath);
 
-        // Since it displays to console, we can't easily test output, but ensure no exception
-        Assert.True(true); // Placeholder - the call above should not throw
+        // Call ViewUserAccount - should display without error, so we assert True
+        User.ViewUserAccount(userFilePath);
+        Assert.True(true); 
     }
 }

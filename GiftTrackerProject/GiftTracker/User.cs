@@ -11,7 +11,6 @@ namespace GiftTracker;
 public static class User{
     public static void ViewUserAccount(string userFilePath)
     {
-       
         // check for existing of user data file
         FileSaver.CheckFileExists(userFilePath);
         ConsoleUI.DisplayFileData(userFilePath);
@@ -32,12 +31,13 @@ public static class User{
         
         else
         {
-            // Parse existing data
+            // Parse existing data from userFilePath
             var lines = fileContents.Trim().Split('\n');
             string existingFirstName = "";
             string existingLastName = "";
             string existingEmail = "";
             string existingSMS = "";
+            string existingSMTP = "";
 
             foreach (var line in lines)
             {
@@ -55,9 +55,11 @@ public static class User{
                 {
                     existingSMS = line.Substring(22);
                 }
+                else if (line.StartsWith("SMTP"))
+                {
+                    existingSMTP = line.Substring(19);
+                }
             }
-
-
 
             while (true)
             {
@@ -71,7 +73,7 @@ public static class User{
                 switch (editApproved)
                 {
                     case "yes":
-                        PromptUserAccountEntry(existingFirstName, existingLastName, existingEmail, existingSMS);
+                        PromptUserAccountEntry(existingFirstName, existingLastName, existingEmail, existingSMS, existingSMTP);
                         return;
 
                     case "no":
@@ -87,14 +89,17 @@ public static class User{
     } // end EditUser() method
 
 
-    public static void PromptUserAccountEntry(string defaultFirstName = "", string defaultLastName = "", string defaultEmail = "", string defaultSMS = "")
+    public static void PromptUserAccountEntry(
+        string defaultFirstName = "", 
+        string defaultLastName = "", 
+        string defaultEmail = "", 
+        string defaultSMS = "", 
+        string defaultSMTP = "")
     {
-        // Creates or edits user account data for application user to store
-        // email address and sms contact for future enhancements
+        // Creates or edits user account data for application user to store email address, sms, and SMTP contact for future enhancements
 
         Console.Clear();
         Console.WriteLine("Let's add/edit your user information...");
-        // Removed: File.WriteAllText(userFilePath, ""); - will clear in ConfirmNewEntry if confirmed
 
         // First name
         Console.WriteLine($"\nEnter the user's first name{(string.IsNullOrEmpty(defaultFirstName) ? "" : $" (current: {defaultFirstName})")}: ");
@@ -157,10 +162,6 @@ public static class User{
             }
         } while (!emailIsValid); // Loop until input is valid
 
-
-
-
-
         Console.Clear();
         // Get valid telephone number for SMS
         string userSMS;
@@ -169,6 +170,7 @@ public static class User{
         do
         {
             userSMS = ConsoleUI.AskForInput($"\nEnter your telephone number{(string.IsNullOrEmpty(defaultSMS) ? "" : $" (current: {defaultSMS})")}: ");
+
             if (string.IsNullOrEmpty(userSMS) && !string.IsNullOrEmpty(defaultSMS))
             {
                 userSMS = defaultSMS;
@@ -177,17 +179,41 @@ public static class User{
             {
                 Console.WriteLine("Invalid format. Please enter a 10-digit number (###-###-####).");
             }
-        } 
+        }
         while (!Regex.IsMatch(userSMS, pattern));
-
         Console.WriteLine($"Valid number entered: {userSMS}");
 
+
         Console.Clear();
-        string userEntry = $"Name: {userFirstName} {userLastName}\nEmail: {userEmail}\nTelephone/SMS number: {userSMS}\n";
+        // Get valid address for SMTP server
+        string userSMTP;
+        // Regex for SMTP pattern
+        string SMTPpattern = @"^(?=.{1,255}$)[0-9A-Za-z](?:(?:[0-9A-Za-z]|-){0,61}[0-9A-Za-z])?(?:\.[0-9A-Za-z](?:(?:[0-9A-Za-z]|-){0,61}[0-9A-Za-z])?)*$";
+        do
+        {
+            userSMTP = ConsoleUI.AskForInput(
+                $"\nEnter your SMTP server address (e.g. smtp.gmail.com) {(string.IsNullOrEmpty(defaultSMTP) ? "" : $"\n(current: {defaultSMTP})")}");
+
+            if (string.IsNullOrEmpty(userSMTP) && 
+                !string.IsNullOrEmpty(defaultSMTP))
+            {
+                userSMTP = defaultSMTP;
+            }
+            else if (!Regex.IsMatch(userSMTP, SMTPpattern))
+            {
+                Console.WriteLine("\nInvalid format. Please enter a valid server address (e.g., smtp.gmail.com)");
+            }
+        } while(!Regex.IsMatch(userSMTP, SMTPpattern));
+        Console.WriteLine($"\nValid address entered: {userSMTP}");
+
+        Console.Clear();
+        string userEntry = $"Name: {userFirstName} {userLastName}\nEmail: {userEmail}\nTelephone/SMS number: {userSMS}\nSMTP email server: {userSMTP} \n";
 
         // Confirm data entry and save to file
         ConfirmNewEntry("user-account.txt", userEntry);
     }
+
+
     public static void ConfirmNewEntry(string userFilePath, string userData)
     {
         // Confirm user data entry and save to file
@@ -209,7 +235,7 @@ public static class User{
 
             switch (confirmation) {
             case "yes":
-                // if yes, saves data to the datafile at userFilePath
+                // Save data to the datafile at userFilePath
                 Console.Clear();
                 Console.WriteLine("\nSaving user account information to file...\n");
                 Console.WriteLine(userData);
@@ -220,12 +246,9 @@ public static class User{
             case "no":
                 // if no, retuns user to main menu
                 Console.WriteLine("\nReturn to the menu to re-enter this user...\n");
-                //TODO: ADD DATA ENTRY LOGIC HERE
-                //TODO:Loop back to data entry if user selects 'no' and add option to return to menu
                 return;
 
             case "cancel":
-                // if cancel, cancels entry and returns user to main menu
                 return;
             }
         }
